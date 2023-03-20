@@ -1,7 +1,7 @@
 <p align="center"><b><h2>E-Apoteka</h2></b></p>
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/92300059/226218826-2c6067f6-6cf3-4095-b498-2419be0f906a.png" height=120 widht = 150>
+  <img src="https://user-images.githubusercontent.com/92300059/226218826-2c6067f6-6cf3-4095-b498-2419be0f906a.png" height=150 widht = 150>
 </p>
 
 ##
