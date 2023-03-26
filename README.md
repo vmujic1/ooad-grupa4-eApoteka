@@ -30,16 +30,16 @@ dodatnu praktičnost.
   <li>Pretraživanje i pregled dostupnih lijekova razvrstanih po kategorijam</li>
   <li>Naručivanje lijekova i medicinskih proizvoda putem interneta</li>
   <li>Praćenje statusa narudžbe i isporuke</li>
-  <li>Više različitih načina plaćanja (kreditna kartica, PayPal itd.)</li>
-  <li>Praćenje vlastite medicinske historije i ispisivanje historije lijekova koje je korisnik
-koristio</li>
-  <li>Pregled najnovijih vijesti o zdravlju i medicinskim dostignućima</li>
-  <li>Praćenje rokova važenja recepta i automatsko obavještavanje o potrebi obnove
-isti</li>
-  <li>Izrada prilagođenih planova terapije i podsjetnici za uzimanje lijekova</li>
-  <li>Praćenje i upravljanje troškovima za lijekove i medicinske proizvode.</li>
+  <li>Više različitih načina plaćanja (kreditna kartica, PayPal, plaćanje pouzećem)</li>
+  <li>Praćenje vlastite medicinske historije i historije plaćanja (kreiranje izvještaja)</li>
+  <li>Registracija ili prijava na sistem</li>
+  <li>Komentiranje i ocjenjivanje lijekova i proizvoda</li>
+  <li>Unos lijekova i proizvoda u sistem</li>
+  <li>Unos recepta</li>
   <li>Narudžba proizvoda koji trenutno nisu u ponudi</li>
   <li>Komunikacija korisnika sa stručnim medicinskim osobljem.</li>
+  <li>Određivanje vrste kupovine (troskove snosi zavod ili kupac)</li>
+  <li>Odabir načina preuzimanja (dostava ili lično u apoteci)</li>
   
   
 </ul>
@@ -50,7 +50,8 @@ isti</li>
 
 <ul>
   <li>Admin</li>
-  <li>Medicinsko osoblje(uposlenici apoteke i ljekari)</li>
+  <li>Farmaceut</li>
+  <li>Ljekar</li>
   <li>Kupci</li>
   
   
