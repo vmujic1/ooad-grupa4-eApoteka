@@ -52,7 +52,8 @@ dodatnu praktičnost.
   <li>Admin</li>
   <li>Farmaceut</li>
   <li>Ljekar</li>
-  <li>Kupci</li>
+  <li>Korisnik</li>
+  <li>Gost</li>
   
   
   
