@@ -30,7 +30,7 @@ dodatnu praktičnost.
   <li>Pretraživanje i pregled dostupnih lijekova razvrstanih po kategorijam</li>
   <li>Naručivanje lijekova i medicinskih proizvoda putem interneta</li>
   <li>Praćenje statusa narudžbe i isporuke</li>
-  <li>Više različitih načina plaćanja (kreditna kartica, PayPal, plaćanje pouzećem)</li>
+  <li>Plaćanje naručenih proizvoda</li>
   <li>Praćenje vlastite medicinske historije i historije plaćanja (kreiranje izvještaja)</li>
   <li>Registracija ili prijava na sistem</li>
   <li>Komentiranje i ocjenjivanje lijekova i proizvoda</li>
