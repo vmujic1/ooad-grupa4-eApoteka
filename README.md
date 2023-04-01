@@ -39,7 +39,8 @@ dodatnu praktičnost.
   <li>Narudžba proizvoda koji trenutno nisu u ponudi</li>
   <li>Komunikacija korisnika sa stručnim medicinskim osobljem.</li>
   <li>Određivanje vrste kupovine (troskove snosi zavod ili kupac)</li>
-  <li>Odabir načina preuzimanja (dostava ili lično u apoteci)</li>
+  <li>Odabir načina preuzimanja (dostava [lokaciju odabrati na mapi] ili lično u apoteci)</li>
+  
   
   
 </ul>
