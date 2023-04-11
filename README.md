@@ -27,7 +27,7 @@ dodatnu praktičnost.
 <h2><b>Funkcionalnosti: </b></h2>
 
 <ul>
-  <li>Pretraživanje i pregled dostupnih lijekova razvrstanih po kategorijam</li>
+  <li>Pretraživanje i pregled dostupnih lijekova razvrstanih po kategorijama</li>
   <li>Naručivanje lijekova i medicinskih proizvoda putem interneta</li>
   <li>Praćenje statusa narudžbe i isporuke</li>
   <li>Plaćanje naručenih proizvoda</li>
@@ -66,6 +66,7 @@ dodatnu praktičnost.
 <div>
   <img src="https://github.com/devicons/devicon/blob/master/icons/csharp/csharp-line.svg" title="C#" alt="Visual studio" width="40" height="40"/>&nbsp;
   <img src="https://github.com/devicons/devicon/blob/master/icons/visualstudio/visualstudio-plain.svg" title="Visual studio" alt="Visual studio" width="40" height="40"/>&nbsp;
+  <img src="https://github.com/devicons/devicon/blob/master/icons/dotnetcore/dotnetcore-original.svg" title="Visual studio" alt="Visual studio" width="40" height="40"/>&nbsp;
   
 </div>
 
