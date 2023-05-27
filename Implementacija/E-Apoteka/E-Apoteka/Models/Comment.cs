@@ -11,12 +11,15 @@ public class Comment
 
     [ForeignKey("Product")]
     public int ProductId { get; set; }
+    public Product Product { get; set; }
 
     [ForeignKey("User")]
     public int UserId { get; set; }
+    public User User { get; set; }
 
     public string Text { get; set; }
-    public string rating { get; set; }
+    public string Rating { get; set; }
     public DateTime CommentDate { get; set; }
+    public Comment() { }
 
 }

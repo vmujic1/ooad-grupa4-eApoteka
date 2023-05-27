@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Thinkpad\\source\\repos\\E-Apoteka\\E-Apoteka\\E-Apoteka.csproj": {}
+    "C:\\Users\\emirs\\ooad-grupa4-eApoteka\\Implementacija\\E-Apoteka\\E-Apoteka\\E-Apoteka.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Thinkpad\\source\\repos\\E-Apoteka\\E-Apoteka\\E-Apoteka.csproj": {
+    "C:\\Users\\emirs\\ooad-grupa4-eApoteka\\Implementacija\\E-Apoteka\\E-Apoteka\\E-Apoteka.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Thinkpad\\source\\repos\\E-Apoteka\\E-Apoteka\\E-Apoteka.csproj",
+        "projectUniqueName": "C:\\Users\\emirs\\ooad-grupa4-eApoteka\\Implementacija\\E-Apoteka\\E-Apoteka\\E-Apoteka.csproj",
         "projectName": "E-Apoteka",
-        "projectPath": "C:\\Users\\Thinkpad\\source\\repos\\E-Apoteka\\E-Apoteka\\E-Apoteka.csproj",
-        "packagesPath": "C:\\Users\\Thinkpad\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Thinkpad\\source\\repos\\E-Apoteka\\E-Apoteka\\obj\\",
+        "projectPath": "C:\\Users\\emirs\\ooad-grupa4-eApoteka\\Implementacija\\E-Apoteka\\E-Apoteka\\E-Apoteka.csproj",
+        "packagesPath": "C:\\Users\\emirs\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\emirs\\ooad-grupa4-eApoteka\\Implementacija\\E-Apoteka\\E-Apoteka\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Thinkpad\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\emirs\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

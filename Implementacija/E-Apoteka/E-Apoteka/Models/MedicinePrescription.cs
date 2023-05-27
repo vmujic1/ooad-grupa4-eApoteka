@@ -10,8 +10,11 @@ namespace E_Apoteka.Models
 
         [ForeignKey("Product")]
         public int MedicineId { get; set; }
+        public Medicine Medicine { get; set; }
 
         [ForeignKey("Prescription")]
         public int PrescriptionId { get; set; }
+        public Prescription Prescription { get; set; }
+        public MedicinePrescription() { }
     }
 }

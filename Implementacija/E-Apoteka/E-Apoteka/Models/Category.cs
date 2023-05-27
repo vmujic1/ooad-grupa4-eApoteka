@@ -7,6 +7,6 @@ namespace E_Apoteka.Models
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
-        List<Medicine> medicines;
+        public Category() { }
     }
 }

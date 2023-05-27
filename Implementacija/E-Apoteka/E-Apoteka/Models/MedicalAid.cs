@@ -2,5 +2,6 @@
 {
     public class MedicalAid : Product
     {
+        public MedicalAid() { }
     }
 }

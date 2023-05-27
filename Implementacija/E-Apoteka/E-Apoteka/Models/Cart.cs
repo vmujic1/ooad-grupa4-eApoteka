@@ -9,9 +9,9 @@ public class Cart
     [Key]
     public int Id { get; set; }
 
-    List<Dictionary<Medicine, int>> products;
-
     [ForeignKey("User")]
     public int UserId { get; set; }
-    double TotalPrice { get; set; }
+    public User User { get; set; }
+    public double TotalPrice { get; set; }
+    public Cart() { }
 }

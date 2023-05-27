@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.Extensions.Hosting;
+using System.ComponentModel.DataAnnotations;
 
 namespace E_Apoteka.Models
 {
@@ -7,6 +8,8 @@ namespace E_Apoteka.Models
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
-        public List<Medicine> Medicines { get; set; }
-    }
+        public List<Medicine> Medicines { get;}
+
+        public Manufacturer() { }
+	}
 }

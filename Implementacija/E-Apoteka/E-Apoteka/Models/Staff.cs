@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 
 namespace E_Apoteka.Models;
 
@@ -8,7 +9,6 @@ public class Staff
     public String Name { get; set;}
     public String Surname { get; set;}
     public String  Username { get; set;}
-
     public String Password { get; set;}
 
     public String Email { get; set;}
@@ -17,4 +17,7 @@ public class Staff
 
     public Role Role { get; set;}
 
+    public List<Prescription> Prescriptions { get; set;}
+
+    public Staff() { }
 }

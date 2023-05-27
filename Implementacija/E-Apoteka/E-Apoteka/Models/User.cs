@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 
 namespace E_Apoteka.Models;
 
@@ -8,7 +9,6 @@ public class User
 {
     [Key]
     public int Id { get; set; }
-
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public string Username { get; set; }
@@ -19,10 +19,10 @@ public class User
     public DateTime Birthdate { get; set; }
     public string InsuranceNumber { get; set; }
 
-    List<Prescription> prescriptions;
-    List<Order> orders;
-    List<Comment> comments;
+    public List<Prescription> Prescriptions { get; set; }
+    public List<Order> Orders { get; set; }
+    public List<Comment> Comments { get; set; }
+    public Cart? Cart { get; set; }
 
-    [ForeignKey("Cart")]
-    public int Cart { get; set; }
+    public User() {}
 }
