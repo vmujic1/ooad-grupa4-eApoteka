@@ -9,11 +9,13 @@ public class Prescription
     [Key]
     public int Id { get; set; }
 
-    [ForeignKey("User")]
-    public int UserId { get; set; }
+    [ForeignKey("AspNetUser")]
+    public string UserId { get; set; }
+    public User User { get; set; }
 
-    [ForeignKey("Staff")]
-    public int StaffId { get; set; }
+    [ForeignKey("AspNetUser")]
+    public string StaffId { get; set; }
+    public Staff Staff { get; set; }
     public int Amount { get; set; }
     public string InsuranceNumber { get; set; }
     public DateTime IssueDate { get; set; }

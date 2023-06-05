@@ -9,8 +9,8 @@ public class Order
     [Key]
     public int Id { get; set; }
 
-    [ForeignKey("User")]
-    public int CustomerId { get; set; }
+    [ForeignKey("AspNetUser")]
+    public string CustomerId { get; set; }
     public User User { get; set; }
     public OrderStatus OrderStatus { get; set; }
     public DateTime OrderDate { get; set; }
