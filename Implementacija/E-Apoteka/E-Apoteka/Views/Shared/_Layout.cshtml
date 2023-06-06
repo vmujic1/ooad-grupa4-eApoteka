@@ -7,12 +7,19 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/E_Apoteka.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/fontawesome/css/all.min.css" />
 </head>
 <body>
     <header>
+        <div style="display: flex; align-items: center; width: 100%; height: 15vh; background-color: #007bff; color: white; padding: 10px; margin: 0;">
+            <img src="https://user-images.githubusercontent.com/92300059/226218826-2c6067f6-6cf3-4095-b498-2419be0f906a.png" alt="Your Photo" style="margin-right: 10px; align-self: flex-start; max-height: 100%;">
+            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; flex-grow: 1;">
+                <a style="margin-right: 0; text-decoration: none; color: white; height: 100%; font-size: 46px;" asp-area="" asp-controller="Home" asp-action="Index">E-Apoteka</a>
+            </div>
+        </div>
+
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">E_Apoteka</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -23,7 +30,10 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Shop" asp-action="Index">Shop</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Report" asp-action="Index">Report</a>
                         </li>
                     </ul>
                     <partial name="_LoginPartial" />
@@ -31,6 +41,7 @@
             </div>
         </nav>
     </header>
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()

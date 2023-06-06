@@ -16,3 +16,72 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.*{
+    font-family:'Comic Sans MS'
+}
+
+.slideshow-container {
+    max-width: auto;
+    position: relative;
+    margin: 10px;
+}
+
+.slide {
+    display: none;
+}
+
+    .slide img {
+        width: 100%;
+        height: auto;
+    }
+
+.prev,
+.next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 16px;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+}
+
+.prev {
+    left: 0;
+}
+
+.next {
+    right: 0;
+}
+
+.online-pharmacy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    background-color: #007bff;
+    padding: 20px;
+    color: white;
+}
+
+
+.button-container {
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.buy-now {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    cursor: pointer;
+    text-decoration: none;
+    background-color: white;
+    font-family: 'Comic Sans MS';
+    font-weight: bold;
+}

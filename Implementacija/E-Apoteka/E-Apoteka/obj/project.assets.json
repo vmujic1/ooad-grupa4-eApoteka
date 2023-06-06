@@ -2,6 +2,9 @@
   "version": 3,
   "targets": {
     "net6.0": {
+      "FontAwesome/4.7.0": {
+        "type": "package"
+      },
       "Humanizer.Core/2.8.26": {
         "type": "package",
         "compile": {
@@ -3702,6 +3705,27 @@
     }
   },
   "libraries": {
+    "FontAwesome/4.7.0": {
+      "sha512": "n4H/brfszElyoZ4kmGh8E75uqvLzLvFr3h2PFVdPH1LwUmWIpeqdaW2pcC4oZAhg7sESyObh0IZpAI8COCNeUg==",
+      "type": "package",
+      "path": "fontawesome/4.7.0",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Content/Content/font-awesome.css",
+        "Content/Content/font-awesome.min.css",
+        "Content/fonts/FontAwesome.otf",
+        "Content/fonts/fontawesome-webfont.eot",
+        "Content/fonts/fontawesome-webfont.svg",
+        "Content/fonts/fontawesome-webfont.ttf",
+        "Content/fonts/fontawesome-webfont.woff",
+        "Content/fonts/fontawesome-webfont.woff2",
+        "fontawesome.4.7.0.nupkg.sha512",
+        "fontawesome.nuspec",
+        "tools/install.ps1"
+      ]
+    },
     "Humanizer.Core/2.8.26": {
       "sha512": "OiKusGL20vby4uDEswj2IgkdchC1yQ6rwbIkZDVBPIR6al2b7n3pC91elBul9q33KaBgRKhbZH3+2Ur4fnWx2A==",
       "type": "package",
@@ -10450,6 +10474,7 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "FontAwesome >= 4.7.0",
       "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore >= 6.0.13",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 6.0.13",
       "Microsoft.AspNetCore.Identity.UI >= 6.0.13",
@@ -10459,24 +10484,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\emirs\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\Thinkpad\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\emirs\\ooad-grupa4-eApoteka\\Implementacija\\E-Apoteka\\E-Apoteka\\E-Apoteka.csproj",
+      "projectUniqueName": "C:\\Users\\Thinkpad\\source\\OOAD\\ooad-grupa4-eApoteka\\Implementacija\\E-Apoteka\\E-Apoteka\\E-Apoteka.csproj",
       "projectName": "E-Apoteka",
-      "projectPath": "C:\\Users\\emirs\\ooad-grupa4-eApoteka\\Implementacija\\E-Apoteka\\E-Apoteka\\E-Apoteka.csproj",
-      "packagesPath": "C:\\Users\\emirs\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\emirs\\ooad-grupa4-eApoteka\\Implementacija\\E-Apoteka\\E-Apoteka\\obj\\",
+      "projectPath": "C:\\Users\\Thinkpad\\source\\OOAD\\ooad-grupa4-eApoteka\\Implementacija\\E-Apoteka\\E-Apoteka\\E-Apoteka.csproj",
+      "packagesPath": "C:\\Users\\Thinkpad\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Thinkpad\\source\\OOAD\\ooad-grupa4-eApoteka\\Implementacija\\E-Apoteka\\E-Apoteka\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\emirs\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\Thinkpad\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -10502,6 +10522,10 @@
       "net6.0": {
         "targetAlias": "net6.0",
         "dependencies": {
+          "FontAwesome": {
+            "target": "Package",
+            "version": "[4.7.0, )"
+          },
           "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
             "target": "Package",
             "version": "[6.0.13, )"
