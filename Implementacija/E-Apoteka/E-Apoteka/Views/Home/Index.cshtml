@@ -3,19 +3,33 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4" style="font-family: 'Roboto'; font-weight:500; color:#007bff">Popularni proizvodi</h1>
 </div>
 
 <div class="slideshow-container">
     <div class="slide">
-        <img src="product1.jpg" alt="Product 1">
+        <div class="polaroid">
+            <img src="https://www.bosnalijek.ba/uimages/prod/U1B01AD7_Paracetamol20Bosnalijek2050020mg20tablete20a2020-1.jpg" alt="PARACETAMOL BOSNALIJEK" style="width:40%; height:40%">
+            <div class="container">
+                <p class="description">Paracetamol Bosnalijek</p>
+            </div>
+        </div>
     </div>
     <div class="slide">
-        <img src="product2.jpg" alt="Product 2">
+        <div class="polaroid">
+            <img src="https://res.cloudinary.com/belupo-hr/image/upload/c_limit,h_800,w_780/v1648131403/nktjtihdxsh9yxycwvek" alt="Neofen_Combo" style="width:40%; height:40%">
+            <div class="container">
+                <p class="description">Neofen Combo</p>
+            </div>
+        </div>
     </div>
     <div class="slide">
-        <img src="product3.jpg" alt="Product 3">
+        <div class="polaroid">
+            <img src="https://www.medical-centar.hr/wp-content/uploads/2013/08/novi-omron-m3-comfort-tlakomjer-nadlaktica-01.jpg" alt="Omron_M3" style="width:40%; height:40%">
+            <div class="container">
+                <p class="description">Tlakomjer digitalni stolni Omron M3</p>
+            </div>
+        </div>
     </div>
     <!-- Add more slide divs for additional products -->
 
@@ -49,13 +63,29 @@
 </script>
 
 <div class="online-pharmacy">
-    <h2>ONLINE PHARMACY</h2>
-    <p>Shop at our pharmacy quick and simple with free delivery</p>
+    <h2 style="font-family: 'Roboto'; font-weight: 500;">ONLINE APOTEKA</h2>
+    <p style="font-family: 'Roboto'; font-weight: 500; font-size:21px;">Kupite u našoj apoteci brzo i jednostavno uz besplatnu dostavu!</p>
     <div class="button-container">
         <a asp-area="" asp-controller="Products" asp-action="Index">
-            <button class="buy-now">BUY NOW</button>
+            <button class="buy-now" style="font-family: 'Roboto'; font-weight: 500;">KUPI ODMAH</button>
         </a>
     </div>
 </div>
+
+<footer style="margin-top: 50px; border-style: solid;">
+    <div class="footer-column" style="margin:10px;">
+        <div class="about-us">
+            <h3>About Us</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dictum lorem vel viverra faucibus. In ac nisl massa.</p>
+        </div>
+    </div>
+    <div class="footer-column" style="margin:10px;">
+        <div class="contact">
+            <h3>Contact</h3>
+            <p><strong>Location:</strong> 123 Example Street, City, Country</p>
+            <p><strong>Phone:</strong> +1 555-1234-5678</p>
+        </div>
+    </div>
+</footer>
 
 
