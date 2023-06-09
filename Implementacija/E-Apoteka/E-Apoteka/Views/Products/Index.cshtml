@@ -4,59 +4,21 @@
     ViewData["Title"] = "Index";
 }
 
-<style>
-    form {
-        background-color: #4654e1;
-        height: 44px;
-        border-radius: 5px;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-    }
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="~/css/Shop.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    input {
-        all: unset;
-        font: 16px system-ui;
-        color: #fff;
-        height: 100%;
-        width: 100%;
-        padding: 6px 10px;
-    }
+</head>
 
-    ::placeholder {
-        color: #fff;
-        opacity: 0.7;
-    }
-
-    .header {
-        display: flex;
-    }
-
-    .column {
-        flex: 1;
-    }
-
-</style>
-<div class="header"; style="display: flex; float: right;">
-    
-    <form id="form" role="search">
-        <input type="search" id="query" name="q"
-               placeholder="Search..."
-               aria-label="Search through site content" ; style="width: 80%; margin-right: 20px;">
-        <button>Search</button>
-    </form>
-
-    <select name="cars" id="cars">
-        <optgroup label="Swedish Cars">
-            <option value="volvo">Volvo</option>
-            <option value="saab">Saab</option>
-        </optgroup>
-        <optgroup label="German Cars">
-            <option value="mercedes">Mercedes</option>
-            <option value="audi">Audi</option>
-        </optgroup>
-    </select>
+<div class="input-group">
+    <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" style="
+width: 100px;
+"/>
+    <button type="button" class="btn btn-outline-primary">Search</button>
 </div>
+
 
 
 <table class="table">

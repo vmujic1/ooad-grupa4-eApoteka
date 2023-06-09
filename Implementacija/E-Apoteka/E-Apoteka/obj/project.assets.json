@@ -10484,19 +10484,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\adohas\\.nuget\\packages\\": {}
+    "C:\\Users\\rzyen\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\adohas\\ooad-grupa4-eApoteka\\Implementacija\\E-Apoteka\\E-Apoteka\\E-Apoteka.csproj",
+      "projectUniqueName": "C:\\Users\\rzyen\\OneDrive\\Desktop\\ooad-grupa4-eApoteka\\Implementacija\\E-Apoteka\\E-Apoteka\\E-Apoteka.csproj",
       "projectName": "E-Apoteka",
-      "projectPath": "C:\\Users\\adohas\\ooad-grupa4-eApoteka\\Implementacija\\E-Apoteka\\E-Apoteka\\E-Apoteka.csproj",
-      "packagesPath": "C:\\Users\\adohas\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\adohas\\ooad-grupa4-eApoteka\\Implementacija\\E-Apoteka\\E-Apoteka\\obj\\",
+      "projectPath": "C:\\Users\\rzyen\\OneDrive\\Desktop\\ooad-grupa4-eApoteka\\Implementacija\\E-Apoteka\\E-Apoteka\\E-Apoteka.csproj",
+      "packagesPath": "C:\\Users\\rzyen\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\rzyen\\OneDrive\\Desktop\\ooad-grupa4-eApoteka\\Implementacija\\E-Apoteka\\E-Apoteka\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\adohas\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\rzyen\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
