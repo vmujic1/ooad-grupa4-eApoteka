@@ -9,69 +9,301 @@
     <meta charset="utf-8" />
     <link rel="stylesheet" href="~/css/Shop.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+    <style>
+        .card-body {
+            height: 300px; 
+        }
+    </style>
 </head>
 
 <div class="input-group">
-    <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" style="
-width: 100px;
-"/>
+    <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" id="bar"/>
     <button type="button" class="btn btn-outline-primary">Search</button>
+    <select>Odaberi</select>
+</div>
+
+<hr/>
+
+
+<div class="container d-flex justify-content-center mt-50 mb-50">
+
+
+    <div class="row">
+        <div class="col-md-4 mt-2">
+
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-img-actions">
+
+                        <img src="https://www.bosnalijek.ba/uimages/prod/U1B01AD7_Paracetamol20Bosnalijek2050020mg20tablete20a2020-1.jpg" class="card-img img-fluid" width="96" height="350" alt="">
+
+
+                    </div>
+                </div>
+
+                <div class="card-body bg-light text-center">
+                    <div class="mb-2">
+                        <h6 class="font-weight-semibold mb-2">
+                            <a href="#" class="text-default mb-2" data-abc="true" asp-area="" asp-controller="Products" asp-action="Details">Paracetamol Bosnalijek</a>
+                        </h6>
+
+                        <a href="#" class="text-muted" data-abc="true">Analgetik</a>
+                    </div>
+
+                    <h3 class="mb-0 font-weight-semibold">2.99KM</h3>
+
+                    <div>
+                        <i class="fa fa-star star"></i>
+                        <i class="fa fa-star star"></i>
+                        <i class="fa fa-star star"></i>
+                        <i class="fa fa-star star"></i>
+                    </div>
+
+                    <div class="text-muted mb-3">34 recenzije</div>
+
+                    <button type="button" class="btn bg-cart"><i class="fa fa-cart-plus mr-2"></i> Dodaj u korpu</button>
+
+
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+
+        <div class="col-md-4 mt-2">
+
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-img-actions">
+
+                        <img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1562074043/234.png" class="card-img img-fluid" width="96" height="350" alt="">
+
+
+                    </div>
+                </div>
+
+                <div class="card-body bg-light text-center">
+                    <div class="mb-2">
+                        <h6 class="font-weight-semibold mb-2">
+                            <a href="#" class="text-default mb-2" data-abc="true">Toshiba Notebook with 500GB HDD & 8GB RAM</a>
+                        </h6>
+
+                        <a href="#" class="text-muted" data-abc="true">Laptops & Notebooks</a>
+                    </div>
+
+                    <h3 class="mb-0 font-weight-semibold">$250.99</h3>
+
+                    <div>
+                        <i class="fa fa-star star"></i>
+                        <i class="fa fa-star star"></i>
+                        <i class="fa fa-star star"></i>
+                        <i class="fa fa-star star"></i>
+                    </div>
+
+                    <div class="text-muted mb-3">34 reviews</div>
+
+                    <button type="button" class="btn bg-cart"><i class="fa fa-cart-plus mr-2"></i> Add to cart</button>
+
+
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+        <div class="col-md-4 mt-2">
+
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-img-actions">
+
+                        <img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1562074043/234.png" class="card-img img-fluid" width="96" height="350" alt="">
+
+
+                    </div>
+                </div>
+
+                <div class="card-body bg-light text-center">
+                    <div class="mb-2">
+                        <h6 class="font-weight-semibold mb-2">
+                            <a href="#" class="text-default mb-2" data-abc="true">Toshiba Notebook with 500GB HDD & 8GB RAM</a>
+                        </h6>
+
+                        <a href="#" class="text-muted" data-abc="true">Laptops & Notebooks</a>
+                    </div>
+
+                    <h3 class="mb-0 font-weight-semibold">$250.99</h3>
+
+                    <div>
+                        <i class="fa fa-star star"></i>
+                        <i class="fa fa-star star"></i>
+                        <i class="fa fa-star star"></i>
+                        <i class="fa fa-star star"></i>
+                    </div>
+
+                    <div class="text-muted mb-3">34 reviews</div>
+
+                    <button type="button" class="btn bg-cart"><i class="fa fa-cart-plus mr-2"></i> Add to cart</button>
+
+
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+
+        <div class="col-md-4 mt-2">
+
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-img-actions">
+
+                        <img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1562074043/234.png" class="card-img img-fluid" width="96" height="350" alt="">
+
+
+                    </div>
+                </div>
+
+                <div class="card-body bg-light text-center">
+                    <div class="mb-2">
+                        <h6 class="font-weight-semibold mb-2">
+                            <a href="#" class="text-default mb-2" data-abc="true">Toshiba Notebook with 500GB HDD & 8GB RAM</a>
+                        </h6>
+
+                        <a href="#" class="text-muted" data-abc="true">Laptops & Notebooks</a>
+                    </div>
+
+                    <h3 class="mb-0 font-weight-semibold">$250.99</h3>
+
+                    <div>
+                        <i class="fa fa-star star"></i>
+                        <i class="fa fa-star star"></i>
+                        <i class="fa fa-star star"></i>
+                        <i class="fa fa-star star"></i>
+                    </div>
+
+                    <div class="text-muted mb-3">34 reviews</div>
+
+                    <button type="button" class="btn bg-cart"><i class="fa fa-cart-plus mr-2"></i> Add to cart</button>
+
+
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+
+        <div class="col-md-4 mt-2">
+
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-img-actions">
+
+                        <img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1562074043/234.png" class="card-img img-fluid" width="96" height="350" alt="">
+
+
+                    </div>
+                </div>
+
+                <div class="card-body bg-light text-center">
+                    <div class="mb-2">
+                        <h6 class="font-weight-semibold mb-2">
+                            <a href="#" class="text-default mb-2" data-abc="true">Toshiba Notebook with 500GB HDD & 8GB RAM</a>
+                        </h6>
+
+                        <a href="#" class="text-muted" data-abc="true">Laptops & Notebooks</a>
+                    </div>
+
+                    <h3 class="mb-0 font-weight-semibold">$250.99</h3>
+
+                    <div>
+                        <i class="fa fa-star star"></i>
+                        <i class="fa fa-star star"></i>
+                        <i class="fa fa-star star"></i>
+                        <i class="fa fa-star star"></i>
+                    </div>
+
+                    <div class="text-muted mb-3">34 reviews</div>
+
+                    <button type="button" class="btn bg-cart"><i class="fa fa-cart-plus mr-2"></i> Add to cart</button>
+
+
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+
+        <div class="col-md-4 mt-2">
+
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-img-actions">
+
+                        <img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1562074043/234.png" class="card-img img-fluid" width="96" height="350" alt="">
+
+
+                    </div>
+                </div>
+
+                <div class="card-body bg-light text-center">
+                    <div class="mb-2">
+                        <h6 class="font-weight-semibold mb-2">
+                            <a href="#" class="text-default mb-2" data-abc="true">Toshiba Notebook with 500GB HDD & 8GB RAM</a>
+                        </h6>
+
+                        <a href="#" class="text-muted" data-abc="true">Laptops & Notebooks</a>
+                    </div>
+
+                    <h3 class="mb-0 font-weight-semibold">$250.99</h3>
+
+                    <div>
+                        <i class="fa fa-star star"></i>
+                        <i class="fa fa-star star"></i>
+                        <i class="fa fa-star star"></i>
+                        <i class="fa fa-star star"></i>
+                    </div>
+
+                    <div class="text-muted mb-3">34 reviews</div>
+
+                    <button type="button" class="btn bg-cart"><i class="fa fa-cart-plus mr-2"></i> Add to cart</button>
+
+
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+
+
+
+
+    </div>
 </div>
 
 
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Rating)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Stock)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CategoryId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Rating)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Stock)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CategoryId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+
