@@ -4,33 +4,23 @@
     ViewData["Title"] = "Details";
 }
 
-<link rel="stylesheet" href="~/css/bootstrap.min.css" asp-append-version="true">
-<link rel="stylesheet" href="~/css/magnific-popup.css" asp-append-version="true">
-<link rel="stylesheet" href="~/css/jquery-ui.css" asp-append-version="true">
-<link rel="stylesheet" href="~/css/owl.carousel.min.css" asp-append-version="true">
-<link rel="stylesheet" href="~/css/owl.theme.default.min.css" asp-append-version="true">
-<link rel="stylesheet" href="~/css/aos.css" asp-append-version="true">
-<link rel="stylesheet" href="~/css/style.css" asp-append-version="true">
-
 
 <div class="site-section">
     <div class="container">
         <div class="row">
             <div class="col-md-5 mr-auto">
                 <div class="border text-center">
-                    <img src="images/product_07_large.png" alt="Image" class="img-fluid p-5">
+                    <img src="@Model.ImageUrl" alt="Image" class="img-fluid p-5">
                 </div>
             </div>
             <div class="col-md-6">
-                <h2 class="text-black">Ibuprofen Tablets, 200mg</h2>
+                <h2 style="font-family: 'Roboto'; font-weight: 500; color:#007bff; font-size:32px; margin-bottom:25px;">@Model.Name</h2>
                 <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur, vitae, explicabo? Incidunt facere, natus
-                    soluta dolores iusto! Molestiae expedita veritatis nesciunt doloremque sint asperiores fuga voluptas,
-                    distinctio, aperiam, ratione dolore.
+                    @Model.Description
                 </p>
 
 
-                <p><del>$95.00</del>  <strong class="text-primary h4">$55.00</strong></p>
+                <p><strong style="font-family: 'Roboto'; font-weight: 500; color:#007bff; font-size:32px;">@Model.Price KM</strong></p>
 
 
 
@@ -47,77 +37,40 @@
                     </div>
 
                 </div>
-                <p><a href="cart.html" class="buy-now btn btn-sm height-auto px-4 py-3 btn-primary">Add To Cart</a></p>
+                <a asp-area="" asp-controller="Carts" asp-action="Index" style="display: inline-block; text-decoration: none;">
+                    <button style="width: 200px; justify-content:center; font-family: 'Roboto'; padding: 5px; font-weight: 500; background-color: #007bff; color: white; text-decoration: none;" onmouseover="this.style.backgroundColor='#0056b3';" onmouseout="this.style.backgroundColor='#007bff';">
+                        <i class="fa fas fa-shopping-cart" style="margin-right: 5px;"></i> Dodaj u korpu
+                    </button>
+                </a>
 
-                <div class="mt-5">
-                    <ul class="nav nav-pills mb-3 custom-pill" id="pills-tab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab"
-                               aria-controls="pills-home" aria-selected="true">Ordering Information</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab"
-                               aria-controls="pills-profile" aria-selected="false">Specifications</a>
-                        </li>
 
-                    </ul>
-                    <div class="tab-content" id="pills-tabContent">
-                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                            <table class="table custom-table">
-                                <thead>
-                                <th>Material</th>
-                                <th>Description</th>
-                                <th>Packaging</th>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th scope="row">OTC022401</th>
-                                        <td>Pain Management: Acetaminophen PM Extra-Strength Caplets, 500 mg, 100/Bottle</td>
-                                        <td>1 BT</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">OTC022401</th>
-                                        <td>Pain Management: Acetaminophen PM Extra-Strength Caplets, 500 mg, 100/Bottle</td>
-                                        <td>144/CS</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">OTC022401</th>
-                                        <td>Pain Management: Acetaminophen PM Extra-Strength Caplets, 500 mg, 100/Bottle</td>
-                                        <td>1 EA</td>
-                                    </tr>
+                <script>
+                    // Get the input element and plus/minus buttons
+                    const inputElement = document.querySelector('.input-group input');
+                    const plusButton = document.querySelector('.js-btn-plus');
+                    const minusButton = document.querySelector('.js-btn-minus');
 
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                    // Event listener for the plus button
+                    plusButton.addEventListener('click', () => {
+                        // Increment the input value by 1
+                        inputElement.value = parseInt(inputElement.value) + 1;
+                    });
 
-                            <table class="table custom-table">
+                    // Event listener for the minus button
+                    minusButton.addEventListener('click', () => {
+                        // Decrement the input value by 1, minimum value is 1
+                        if (inputElement.value > 1) {
+                            inputElement.value = parseInt(inputElement.value) - 1;
+                        }
+                    });
 
-                                <tbody>
-                                    <tr>
-                                        <td>HPIS CODE</td>
-                                        <td class="bg-light">999_200_40_0</td>
-                                    </tr>
-                                    <tr>
-                                        <td>HEALTHCARE PROVIDERS ONLY</td>
-                                        <td class="bg-light">No</td>
-                                    </tr>
-                                    <tr>
-                                        <td>LATEX FREE</td>
-                                        <td class="bg-light">Yes, No</td>
-                                    </tr>
-                                    <tr>
-                                        <td>MEDICATION ROUTE</td>
-                                        <td class="bg-light">Topical</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-
-                        </div>
-
-                    </div>
-                </div>
-
+                    // Event listener for the input field to prevent non-positive values
+                    inputElement.addEventListener('input', () => {
+                        if (inputElement.value <= 0) {
+                            inputElement.value = 1;
+                        }
+                    });
+                </script>
 
             </div>
         </div>

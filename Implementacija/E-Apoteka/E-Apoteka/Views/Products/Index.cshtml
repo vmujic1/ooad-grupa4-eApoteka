@@ -30,13 +30,44 @@
                 margin-bottom: 10px;
             }
 
-        .price-slider {
-            margin-top: 20px;
-        }
-
         .category-list li {
             margin: 20px;
         }
+
+        .slider-container {
+            width: 250px;
+            padding: 20px;
+            border-radius: 3px;
+            background-color: #ffffff;
+        }
+
+            .slider-container h4 {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-top: 0;
+            }
+
+        .slider {
+            width: 200px;
+            text-align: center;
+            padding-bottom: 20px;
+            justify-content: center;
+            align-items: center;
+        }
+
+            .slider input[type="range"] {
+                width: 100%;
+                margin-top: 10px;
+            }
+
+            .slider span {
+                display: block;
+                box-shadow: 0 0 20px rgba(0, 139, 253, 0.25);
+                padding: 10px;
+                font-size: 22px;
+                margin-bottom: 35px;
+            }
 
     </style>
 </head>
@@ -61,69 +92,42 @@
 
         <hr />
 
+
         <div style="background-color: #007bff; color:white; padding: 5px; margin-bottom:15px;">
             <h4>Filtriraj po cijeni</h4>
         </div>
 
-        <div class="card">
-
-            <div class="price-content">
-                <div>
-                    <label>Min</label>
-                    <p id="min-value">$50</p>
-                </div>
-
-                <div>
-                    <label>Max</label>
-                    <p id="max-value">$500</p>
-                </div>
-            </div>
-
-            <div class="range-slider">
-                <input type="range" class="min-price" value="100" min="10" max="500" step="10">
-                <input type="range" class="max-price" value="250" min="10" max="500" step="10">
+        <div class="slider-container">
+            <div class="slider">
+                <span id="price-range"></span>
+                <input id="min-price" value="0" min="0" max="200" step="5" type="range">
+                <input id="max-price" value="200" min="0" max="200" step="5" type="range">
             </div>
         </div>
 
         <button id="filter-button" style=" font-family: 'Roboto'; font-weight: 500; background-color: #007bff; color:white; padding: 5px; width:200px; margin-top:20px;">Filtriraj</button>
 
         <script>
-            let minValue = document.getElementById("min-value");
-            let maxValue = document.getElementById("max-value");
+            const minPriceElement = document.getElementById("min-price");
+            const maxPriceElement = document.getElementById("max-price");
+            const priceRangeElement = document.getElementById("price-range");
 
-            function validateRange(minPrice, maxPrice) {
+            function updatePriceRange() {
+                let minPrice = parseInt(minPriceElement.value);
+                let maxPrice = parseInt(maxPriceElement.value);
+
                 if (minPrice > maxPrice) {
-
-                    // Swap to Values
-                    let tempValue = maxPrice;
-                    maxPrice = minPrice;
-                    minPrice = tempValue;
+                    // Swap values
+                    [minPrice, maxPrice] = [maxPrice, minPrice];
                 }
 
-                minValue.innerHTML = "$" + minPrice;
-                maxValue.innerHTML = "$" + maxPrice;
+                priceRangeElement.textContent = `$${minPrice} - $${maxPrice}`;
             }
 
-            const inputElements = document.querySelectorAll("input");
+            minPriceElement.addEventListener("input", updatePriceRange);
+            maxPriceElement.addEventListener("input", updatePriceRange);
 
-            inputElements.forEach((element) => {
-                element.addEventListener("change", (e) => {
-                    let minPrice = parseInt(inputElements[0].value);
-                    let maxPrice = parseInt(inputElements[1].value);
-
-                    validateRange(minPrice, maxPrice);
-                });
-            });
-
-            validateRange(inputElements[0].value, inputElements[1].value);
-
-                        //kod za button implementaciju
-
-            /* const filterButton = document.getElementById("filter-button");
-            filterButton.addEventListener("click", () => {
-                // Add your filtering logic here
-                console.log("Filter button clicked!");
-            });*/
+            updatePriceRange();
         </script>
     </div>
 
@@ -150,51 +154,38 @@
 
         <div class="row">
             <div class="row">
+                @foreach (var item in Model) {
                 <div class="col-md-4 mt-2">
-
-
                     <div class="card">
                         <div class="card-body">
                             <div class="card-img-actions">
-
-                                <img src="https://www.bosnalijek.ba/uimages/prod/U1B01AD7_Paracetamol20Bosnalijek2050020mg20tablete20a2020-1.jpg" class="card-img img-fluid" width="96" height="350" alt="">
-
-
+                                <img src="@item.ImageUrl" class="card-img img-fluid" width="96" height="350" alt="">
                             </div>
                         </div>
 
                         <div class="card-body bg-light text-center">
                             <div class="mb-2">
                                 <h6 class="font-weight-semibold mb-2">
-                                    <a class="text-default mb-2" data-abc="true" asp-area="" asp-controller="Products" asp-action="Details">Paracetamol Bosnalijek</a>
-                                </h6>
-
-                                <a href="#" class="text-muted" data-abc="true">Analgetik</a>
+                                        <a class="text-default mb-2" data-abc="true" asp-area="" asp-controller="Products" asp-action="Details" asp-route-id="@item.Id">@item.Name</a>
+                                </h6> 
+                                <a href="#" class="text-muted" data-abc="true">Na stanju: @item.Stock</a>
                             </div>
 
-                            <h3 class="mb-0 font-weight-semibold">2.99KM</h3>
+                            <h3 class="mb-0 font-weight-semibold">@item.Price KM</h3>
 
-                            <div>
-                                <i class="fa fa-star star"></i>
-                                <i class="fa fa-star star"></i>
-                                <i class="fa fa-star star"></i>
-                                <i class="fa fa-star star"></i>
-                            </div>
+           
 
-                            <div class="text-muted mb-3">34 recenzije</div>
+                            <div class="text-muted mb-3">Ocjena: @item.Rating</div>
 
                             <button type="button" class="btn bg-cart"><i class="fa fa-cart-plus mr-2"></i> Dodaj u korpu</button>
 
 
                         </div>
                     </div>
-
-
-
-
                 </div>
+                }
 
-
+                <!--
                 <div class="col-md-4 mt-2">
 
 
@@ -424,5 +415,6 @@
 
             </div>
         </div>
+        -->
     </div>
 </div>

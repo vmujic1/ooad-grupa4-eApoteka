@@ -10484,19 +10484,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\adohas\\.nuget\\packages\\": {}
+    "C:\\Users\\emirs\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\adohas\\ooad-grupa4-eApoteka\\Implementacija\\E-Apoteka\\E-Apoteka\\E-Apoteka.csproj",
+      "projectUniqueName": "C:\\Users\\emirs\\ooad-grupa4-eApoteka\\Implementacija\\E-Apoteka\\E-Apoteka\\E-Apoteka.csproj",
       "projectName": "E-Apoteka",
-      "projectPath": "C:\\Users\\adohas\\ooad-grupa4-eApoteka\\Implementacija\\E-Apoteka\\E-Apoteka\\E-Apoteka.csproj",
-      "packagesPath": "C:\\Users\\adohas\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\adohas\\ooad-grupa4-eApoteka\\Implementacija\\E-Apoteka\\E-Apoteka\\obj\\",
+      "projectPath": "C:\\Users\\emirs\\ooad-grupa4-eApoteka\\Implementacija\\E-Apoteka\\E-Apoteka\\E-Apoteka.csproj",
+      "packagesPath": "C:\\Users\\emirs\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\emirs\\ooad-grupa4-eApoteka\\Implementacija\\E-Apoteka\\E-Apoteka\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\adohas\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\emirs\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -10572,7 +10577,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
       }
     }
   }
