@@ -166,6 +166,9 @@ namespace E_Apoteka.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+     
+
+
         private bool ProductExists(int id)
         {
           return (_context.Product?.Any(e => e.Id == id)).GetValueOrDefault();
