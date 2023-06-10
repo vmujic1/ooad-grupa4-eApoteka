@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using E_Apoteka.Data;
 using E_Apoteka.Models;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace E_Apoteka.Controllers
 {
@@ -46,6 +48,7 @@ namespace E_Apoteka.Controllers
         }
 
         // GET: Products/Create
+        [Authorize(Roles = "Administrator")]
         public IActionResult Create()
         {
             return View();
@@ -56,7 +59,7 @@ namespace E_Apoteka.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,ManufacturerId,Price,Rating,Stock,CategoryId,Description")] Product product)
+        public async Task<IActionResult> Create([Bind("Id,Name,ManufacturerId,Price,Rating,Stock,CategoryId,Description,ImageUrl")] Product product)
         {
             if (ModelState.IsValid)
             {
@@ -68,6 +71,7 @@ namespace E_Apoteka.Controllers
         }
 
         // GET: Products/Edit/5
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Product == null)
@@ -88,7 +92,7 @@ namespace E_Apoteka.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,ManufacturerId,Price,Rating,Stock,CategoryId,Description")] Product product)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,ManufacturerId,Price,Rating,Stock,CategoryId,Description,ImageUrl")] Product product)
         {
             if (id != product.Id)
             {
@@ -119,6 +123,7 @@ namespace E_Apoteka.Controllers
         }
 
         // GET: Products/Delete/5
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Product == null)

@@ -5,10 +5,8 @@
 }
 
 <h1>Create</h1>
-
-<h4>Product</h4>
 <hr />
-<div class="row">
+<div class="row" style="  display:flex; justify-content:center; align-items:center;">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -17,10 +15,26 @@
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="ManufacturerId" class="control-label"></label>
-                <select asp-for="ManufacturerId" class ="form-control" asp-items="ViewBag.ManufacturerId"></select>
+                <input asp-for="ManufacturerId" class="form-control" />
+                <span asp-validation-for="ManufacturerId" class="text-danger"></span>
             </div>
+            <!--
+            <div class="form-group">
+                <div>
+                    <label asp-for="ManufacturerId" class="control-label" >Proizvodjac:</label>
+                </div>
+                <div>
+                    <select asp-for="ManufacturerId" class="form-control">
+                        
+                    </select>
+                    <span asp-validation-for="ManufacturerId" class="text-danger"></span>
+                </div>
+            </div>
+            -->
+
             <div class="form-group">
                 <label asp-for="Price" class="control-label"></label>
                 <input asp-for="Price" class="form-control" />
@@ -45,6 +59,11 @@
                 <label asp-for="Description" class="control-label"></label>
                 <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageUrl" class="control-label"></label>
+                <input asp-for="ImageUrl" class="form-control" />
+                <span asp-validation-for="ImageUrl" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

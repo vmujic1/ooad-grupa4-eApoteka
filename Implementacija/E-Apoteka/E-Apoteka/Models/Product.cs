@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace E_Apoteka.Models;
 
-public abstract class Product
+public class Product
 {
     [Key]
     public int Id { get; set; }
@@ -27,6 +27,8 @@ public abstract class Product
     public string Description { get; set; }
 
     public List<Comment> Comments { get; set; }
+
+    public string ImageUrl { get; set; }
 
     public Product() { }
 

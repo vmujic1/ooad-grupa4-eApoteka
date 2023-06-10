@@ -36,9 +36,12 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Index">Products</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Report" asp-action="Index">Report</a>
-                        </li>
+                        @if (User.Identity.IsAuthenticated)   // provjera da li je prijavljen
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Report" asp-action="Index">Report</a>
+                            </li>
+                        }
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>
@@ -52,9 +55,19 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - E_Apoteka - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <footer class="border-top footer text-muted" style="margin-top: 50px;">
+        <div class="footer-column" style="">
+            <div class="about-us">
+                <h3>About Us</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dictum lorem vel viverra faucibus. In ac nisl massa.</p>
+            </div>
+        </div>
+        <div class="footer-column" style="">
+            <div class="contact">
+                <h3>Contact</h3>
+                <p><strong>Location:</strong> 123 Example Street, City, Country</p>
+                <p><strong>Phone:</strong> +1 555-1234-5678</p>
+            </div>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
