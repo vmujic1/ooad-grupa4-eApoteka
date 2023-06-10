@@ -13,7 +13,7 @@ public class Product
 
 	[ForeignKey("Manufacturer")]
 	public int ManufacturerId { get; set; }
-	public Manufacturer Manufacturer { get; set; }
+	public Manufacturer? Manufacturer { get; set; }
 
 	public double Price { get; set; }
 
@@ -23,10 +23,11 @@ public class Product
 
     [ForeignKey("Category")]
     public int CategoryId { get; set; }
+    public Category? Category { get; set; }
 
     public string Description { get; set; }
 
-    public List<Comment> Comments { get; set; }
+    public List<Comment>? Comments { get; set; }
 
     public string ImageUrl { get; set; }
 

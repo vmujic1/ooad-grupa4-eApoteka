@@ -14,6 +14,7 @@ namespace E_Apoteka.Controllers
 {
     public class ProductsController : Controller
     {
+
         private readonly ApplicationDbContext _context;
 
         public ProductsController(ApplicationDbContext context)
@@ -61,6 +62,9 @@ namespace E_Apoteka.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,ManufacturerId,Price,Rating,Stock,CategoryId,Description,ImageUrl")] Product product)
         {
+            product.Manufacturer = _context.Find<Manufacturer>(product.ManufacturerId);
+            product.Category = _context.Find<Category>(product.CategoryId);
+            
             if (ModelState.IsValid)
             {
                 _context.Add(product);
@@ -103,6 +107,8 @@ namespace E_Apoteka.Controllers
             {
                 try
                 {
+                    product.Manufacturer = _context.Find<Manufacturer>(product.ManufacturerId);
+                    product.Category = _context.Find<Category>(product.CategoryId);
                     _context.Update(product);
                     await _context.SaveChangesAsync();
                 }
