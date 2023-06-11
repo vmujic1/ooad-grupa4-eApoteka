@@ -29,8 +29,4 @@
     <None Include="C:\Users\Thinkpad\source\OOAD\ooad-grupa4-eApoteka\Implementacija\E-Apoteka\E-Apoteka\Controllers\.editorconfig" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Images\" />
-  </ItemGroup>
-
 </Project>

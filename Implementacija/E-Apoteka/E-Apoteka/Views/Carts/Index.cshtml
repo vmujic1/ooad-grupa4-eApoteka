@@ -1,4 +1,4 @@
-﻿@model IEnumerable<E_Apoteka.Models.Cart>
+﻿@model IEnumerable<E_Apoteka.Models.ProductCart> // Change the model type to ProductCart
 
 @{
     ViewData["Title"] = "Index";
@@ -6,36 +6,33 @@
 
 <h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.User)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TotalPrice)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TotalPrice)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<body>
+    <div class="container">
+        <div class="product-container">
+            @foreach (var productCart in Model)
+            {
+                <div class="product-card">
+                    <img src="@productCart.Product.ImageUrl" alt="Product Image" class="product-image">
+                    <div class="product-info">
+                        <p>@productCart.Product.Name</p>
+                        <p>Cijena: $@productCart.Product.Price</p>
+                        <p>Količina: @productCart.Quantity</p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="natpis" style="margin-top:50px">
+        <div>
+            <p style="font-family: IBM Plex Sans; font-size: 17px; font-weight: 100; margin-top:8px; margin-left: 570px; color: rgba(20, 20, 20, 0.7);">
+                TOTAL: 
+                $@Model.Sum(p => Convert.ToDecimal(p.Product.Price * p.Quantity)).ToString("F2")
+                </p>
+        </div>
+        <div>
+            <form action="/Order">
+                <button type="submit" class="button5" style="margin-left: 15px; margin-bottom: 50px;">CONTINUE</button>
+            </form>
+        </div>
+    </div>
+</body>

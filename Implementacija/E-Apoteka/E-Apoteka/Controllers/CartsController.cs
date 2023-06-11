@@ -8,26 +8,23 @@ using Microsoft.EntityFrameworkCore;
 using E_Apoteka.Data;
 using E_Apoteka.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace E_Apoteka.Controllers
 {
+    [Authorize]
     public class CartsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        
 
         public CartsController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        private readonly UserManager<User> _userManager;
-
-        public CartsController(UserManager<User> userManager)
-        {
-            _userManager = userManager;
-        }
-
-        public async Task<IActionResult> ViewCart()
+        
+        /*public async Task<IActionResult> ViewCart()
         {
             User user = await _userManager.GetUserAsync(User);
             if (user == null)
@@ -38,8 +35,17 @@ namespace E_Apoteka.Controllers
             Cart cart = await GetOrCreateCart(user);
             return View(cart);
         }
+        */
+        // GET: Carts
+            public async Task<IActionResult> Index()
+            {
+               var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == User.Identity.Name);
+               var cart = await _context.Cart.FirstOrDefaultAsync(c => c.UserId == user.Id);
+            var productCarts = _context.ProductCart.Include(pc => pc.Product).Where(pc => pc.CartId == cart.Id).ToList();
+                return View(productCarts);
+        }
 
-        public async Task<IActionResult> AddToCart(Product product)
+        /*public async Task<IActionResult> AddToCart(Product product)
         {
             User user = await _userManager.GetUserAsync(User);
             if (user == null)
@@ -155,6 +161,7 @@ namespace E_Apoteka.Controllers
 
             return cart;
         }
+        */
     }
 
 
