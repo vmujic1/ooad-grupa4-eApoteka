@@ -7,9 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using E_Apoteka.Data;
 using E_Apoteka.Models;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace E_Apoteka.Controllers
 {
+    [Authorize(Roles = "Administrator,User")]
     public class OrdersController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -84,6 +87,7 @@ namespace E_Apoteka.Controllers
         // POST: Orders/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,CustomerId,OrderStatus,OrderDate,OrderType,PaymentType,TotalPrice,DeliveryAddress")] Order order)
@@ -98,6 +102,7 @@ namespace E_Apoteka.Controllers
         }
 
         // GET: Orders/Edit/5
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Order == null)
@@ -116,6 +121,7 @@ namespace E_Apoteka.Controllers
         // POST: Orders/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,CustomerId,OrderStatus,OrderDate,OrderType,PaymentType,TotalPrice,DeliveryAddress")] Order order)
@@ -149,6 +155,7 @@ namespace E_Apoteka.Controllers
         }
 
         // GET: Orders/Delete/5
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Order == null)
@@ -167,6 +174,7 @@ namespace E_Apoteka.Controllers
         }
 
         // POST: Orders/Delete/5
+        [Authorize(Roles = "Administrator")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

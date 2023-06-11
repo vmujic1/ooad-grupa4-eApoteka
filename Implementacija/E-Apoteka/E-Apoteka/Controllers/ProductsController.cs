@@ -47,6 +47,8 @@ namespace E_Apoteka.Controllers
 
             ViewBag.Categories = categories;
 
+
+
             var manufacturerIds = productCategories.Select(pc => pc.Product.ManufacturerId).Distinct().ToList();
             var manufacturers = await _context.Manufacturer
                 .Where(m => manufacturerIds.Contains(m.Id))
@@ -54,12 +56,7 @@ namespace E_Apoteka.Controllers
 
             ViewBag.Manufacturers = manufacturers;
 
-            var commentIds = await _context.Comment.Select(c => c.Id).Where().ToListAsync();
-            var manufacturers = await _context.Manufacturer
-                .Where(m => manufacturerIds.Contains(m.Id))
-                .ToListAsync();
-
-            ViewBag.Manufacturers = manufacturers;
+            
 
             if (minPrice.HasValue && maxPrice.HasValue)
             {
@@ -234,6 +231,7 @@ namespace E_Apoteka.Controllers
         }
 
         // POST: Products/Delete/5
+        [Authorize(Roles = "Administrator")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace E_Apoteka.Controllers
 {
-    [Authorize(Roles = "Administrator,User")]
+    [Authorize(Roles = "Administrator, User")]
     public class CartsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -23,7 +23,7 @@ namespace E_Apoteka.Controllers
             _context = context;
         }
 
-        
+
         /*public async Task<IActionResult> ViewCart()
         {
             User user = await _userManager.GetUserAsync(User);
@@ -37,7 +37,8 @@ namespace E_Apoteka.Controllers
         }
         */
         // GET: Carts
-            public async Task<IActionResult> Index()
+        
+        public async Task<IActionResult> Index()
             {
                var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == User.Identity.Name);
                var cart = await _context.Cart.FirstOrDefaultAsync(c => c.UserId == user.Id && c.Bought == false);
@@ -78,8 +79,9 @@ namespace E_Apoteka.Controllers
                 return View(cart);
             }
 
-            // GET: Carts/Create
-            public IActionResult Create()
+        // GET: Carts/Create
+        [Authorize(Roles = "Administrator")]
+        public IActionResult Create()
             {
                 ViewData["UserId"] = new SelectList(_context.Set<User>(), "Id", "Id");
                 return View();
@@ -88,6 +90,7 @@ namespace E_Apoteka.Controllers
         // POST: Carts/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
             [ValidateAntiForgeryToken]
             public async Task<IActionResult> Create([Bind("Id,UserId,TotalPrice,Bought")] Cart cart)
@@ -101,6 +104,7 @@ namespace E_Apoteka.Controllers
                 ViewData["UserId"] = new SelectList(_context.Set<User>(), "Id", "Id", cart.UserId);
                 return View(cart);
             }
+
 
         [HttpPost]
         public async Task<IActionResult> AddToCart(int id, int quantity)

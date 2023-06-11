@@ -40,12 +40,6 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Index">Products</a>
                             </form>
                         </li>
-                        @if (User.Identity.IsAuthenticated)   // provjera da li je prijavljen
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Report" asp-action="Index">Report</a>
-                            </li>
-                        }
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>
@@ -81,15 +75,15 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <h4>About Us</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque auctor dolor vitae est feugiat, et tincidunt lacus consequat.</p>
+                    <h4>O nama</h4>
+                    <p>E-apoteka - online platforma koja korisnicima omogućava kupovinu lijekova, te drugih medicinskih proizvoda i pomagala, uz dostavu na kućnu adresu za dodatnu praktičnost.</p>
                 </div>
                 <div class="col-md-6">
-                    <h4>Contact Information</h4>
+                    <h4>Kontakt</h4>
                     <ul style="list-style-type:none; padding-left:0;">
-                        <li><i class="fa fa-map-marker"></i> 123 Main Street, City, Country</li>
-                        <li><i class="fa fa-phone"></i> +1 (123) 456-7890</li>
-                        <li><i class="fa fa-envelope"></i> info@example.com</li>
+                        <li><i class="fa fa-map-marker"></i> Elektrotehnički fakultet Sarajevo, Zmaja od Bosne bb</li>
+                        <li><i class="fa fa-phone"></i> +387 33 250 700</li>
+                        <li><i class="fa fa-envelope"></i> etf@etf.unsa.ba</li>
                     </ul>
                 </div>
             </div>
