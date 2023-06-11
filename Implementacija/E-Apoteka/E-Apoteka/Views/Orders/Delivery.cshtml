@@ -1,0 +1,101 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<style>
+    .image-container {
+        display: flex;
+        justify-content: center;
+    }
+</style>
+
+
+<div style="display: flex; justify-content: center; align-items: center;">
+    <div style="margin-right: 10px;">
+        <h3>Vaša adresa:</h3>
+        <input type="text" id="address" name="address" readonly>
+        <button onclick="getLocation()" style="font-style: 'Roboto'; padding: 3px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;">Trenutna lokacija</button>
+    </div>
+</div>
+
+<br />
+
+<div style="display: flex; flex-direction: column; align-items: center;">
+    <div>
+        <a asp-area="" asp-controller="Orders" asp-action="PaymentSelection">
+            <button id="confirm-address" type="submit" style="font-family: 'Roboto'; padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; width:200px;">Potvrdi adresu!</button>
+        </a>
+    </div>
+</div>
+
+<div style="margin-top: 2%; margin-bottom: 2%">
+    <div id="myMap" style="position:relative;width:1300px;height:400px;"></div>
+</div>
+
+
+<script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap' async defer></script>
+
+<script type='text/javascript'>
+    function GetMap() {
+        var map = new Microsoft.Maps.Map('#myMap', {
+            credentials: 'AvDCZJ9tzXv4sAr93J57w5oE6DFdwZhN-TVE1G4f8AOQlOLQDLrVg-cbODQSjXSb',
+            center: new Microsoft.Maps.Location(43.8563, 18.3959),
+            mapTypeId: Microsoft.Maps.MapTypeId.aerial,
+            zoom: 15
+        });
+
+        infobox = new Microsoft.Maps.Infobox(map.getCenter(), {
+            visible: false
+        });
+
+        infobox.setMap(map);
+        var locationField = document.getElementById('address');
+
+        var confirmAddressButton = document.getElementById('order-ride-button');
+
+        confirmAddressButton.addEventListener('click', function () {
+            var locationValue = locationField.value;
+            if (locationValue === "") {
+                alert('Morate unijeti adresu');
+            } else {
+                alert('Potvrđeno!');
+            }
+        });
+    }
+
+    function pushpinClicked(e) {
+        if (e.target.metadata) {
+            infobox.setOptions({
+                location: e.target.getLocation(),
+                title: e.target.metadata.title,
+                description: e.target.metadata.description,
+                visible: true
+            });
+        }
+    }
+
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(convertCoordinates);
+        }
+    }
+
+    function convertCoordinates(position) {
+        var latitude = position.coords.latitude;
+        var longitude = position.coords.longitude;
+
+        var apiKey = 'AvDCZJ9tzXv4sAr93J57w5oE6DFdwZhN-TVE1G4f8AOQlOLQDLrVg-cbODQSjXSb';
+
+        var apiUrl = `https://dev.virtualearth.net/REST/v1/Locations/${latitude},${longitude}?key=${apiKey}`;
+
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                var address = data.resourceSets[0].resources[0].address.formattedAddress;
+                document.getElementById('address').value = address;
+            })
+            .catch(error => console.log(error));
+    }
+    
+
+</script>

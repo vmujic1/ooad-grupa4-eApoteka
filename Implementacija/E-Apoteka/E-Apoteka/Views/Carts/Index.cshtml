@@ -15,23 +15,34 @@
                     <img src="@productCart.Product.ImageUrl" alt="Product Image" class="product-image">
                     <div class="product-info">
                         <p>@productCart.Product.Name</p>
-                        <p>Cijena: $@productCart.Product.Price</p>
+                        <p>Cijena: @productCart.Product.Price KM</p>
                         <p>Količina: @productCart.Quantity</p>
+                        <div>
+                            <form method="post" action="/Carts/RemoveItem">
+                                <input type="hidden" name="id" value="@productCart.Product.Id" />
+                                <button type="submit" class="btn btn-danger">Remove item</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             }
         </div>
     </div>
-    <div class="natpis" style="margin-top:50px">
+    <div class="natpis" style="margin-top:50px ">
         <div>
-            <p style="font-family: IBM Plex Sans; font-size: 17px; font-weight: 100; margin-top:8px; margin-left: 570px; color: rgba(20, 20, 20, 0.7);">
-                TOTAL: 
-                $@Model.Sum(p => Convert.ToDecimal(p.Product.Price * p.Quantity)).ToString("F2")
+            <p style="font-family: 'Roboto'; font-size: 17px; font-weight: 500; ">
+                Ukupna cijena: 
+                @Model.Sum(p => Convert.ToDecimal(p.Product.Price * p.Quantity)).ToString("F2") KM
                 </p>
         </div>
         <div>
-            <form action="/Order">
-                <button type="submit" class="button5" style="margin-left: 15px; margin-bottom: 50px;">CONTINUE</button>
+            <form asp-area="" asp-controller="Orders" asp-action="Index">
+                <button type="submit" class="btn btn-primary" style="margin-left: 15px; margin-bottom: 50px;">CONTINUE</button>
+            </form>
+        </div>
+        <div>
+            <form method="post" action="/Carts/ClearCart">
+                <button type="submit" class="btn btn-danger">Clear Cart</button>
             </form>
         </div>
     </div>

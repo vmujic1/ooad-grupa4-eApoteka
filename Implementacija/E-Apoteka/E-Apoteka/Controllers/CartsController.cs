@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace E_Apoteka.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Administrator,User")]
     public class CartsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -40,276 +40,261 @@ namespace E_Apoteka.Controllers
             public async Task<IActionResult> Index()
             {
                var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == User.Identity.Name);
-               var cart = await _context.Cart.FirstOrDefaultAsync(c => c.UserId == user.Id);
+               var cart = await _context.Cart.FirstOrDefaultAsync(c => c.UserId == user.Id && c.Bought == false);
+            if (cart == null || !_context.ProductCart.Any())
+            {
+                // Cart is empty or null, display a popup or redirect to a specific page
+                TempData["CartMessage"] = "Korpa je trenutno prazna!";
+                return RedirectToAction("EmptyCart");
+            }
             var productCarts = _context.ProductCart.Include(pc => pc.Product).Where(pc => pc.CartId == cart.Id).ToList();
                 return View(productCarts);
         }
 
-        /*public async Task<IActionResult> AddToCart(Product product)
+        // GET: Empty Cart
+        public IActionResult EmptyCart()
         {
-            User user = await _userManager.GetUserAsync(User);
-            if (user == null)
-            {
-                return RedirectToAction("Login", "Account"); // Redirect to login if user is not authenticated
-            }
-
-            Cart cart = await GetOrCreateCart(user);
-            ProductCart productCart = new ProductCart()
-            {
-                ProductId = product.Id,
-                CartId = cart.Id,
-                Quantity = 1 // Set the desired quantity
-            };
-
-            _context.ProductCart.Add(productCart);
-            await _context.SaveChangesAsync();
-            
-
-            return RedirectToAction("ViewCart");
+            ViewBag.Message = TempData["CartMessage"];
+            return View();
         }
 
 
-        public async Task<IActionResult> EmptyCart()
+        // GET: Carts/Details/5
+        public async Task<IActionResult> Details(int? id)
+            {
+                if (id == null || _context.Cart == null)
+                {
+                    return NotFound();
+                }
+
+                var cart = await _context.Cart
+                    .Include(c => c.User)
+                    .FirstOrDefaultAsync(m => m.Id == id);
+                if (cart == null)
+                {
+                    return NotFound();
+                }
+
+                return View(cart);
+            }
+
+            // GET: Carts/Create
+            public IActionResult Create()
+            {
+                ViewData["UserId"] = new SelectList(_context.Set<User>(), "Id", "Id");
+                return View();
+            }
+
+        // POST: Carts/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+            [ValidateAntiForgeryToken]
+            public async Task<IActionResult> Create([Bind("Id,UserId,TotalPrice,Bought")] Cart cart)
+            {
+                if (ModelState.IsValid)
+                {
+                    _context.Add(cart);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                ViewData["UserId"] = new SelectList(_context.Set<User>(), "Id", "Id", cart.UserId);
+                return View(cart);
+            }
+
+        [HttpPost]
+        public async Task<IActionResult> AddToCart(int id, int quantity)
         {
-            User user = await _userManager.GetUserAsync(User);
-            if (user == null)
-            {
-                return RedirectToAction("Login", "Account"); // Redirect to login if user is not authenticated
-            }
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == User.Identity.Name);
+            var cart = await _context.Cart.FirstOrDefaultAsync(c => c.UserId == user.Id && c.Bought == false);
 
-            Cart cart = await GetOrCreateCart(user);
-
-            // Find all ProductCart entries associated with the given cart
-            IQueryable<ProductCart> productCarts = _context.ProductCart.Where(pc => pc.CartId == cart.Id);
-
-            // Remove the found ProductCart entries from the database
-            _context.ProductCart.RemoveRange(productCarts);
-
-            await _context.SaveChangesAsync();
-            
-
-            return RedirectToAction("ViewCart");
-        }
-
-
-        public async Task<IActionResult> RemoveFromCart(Product product)
-        {
-            User user = await _userManager.GetUserAsync(User);
-            if (user == null)
-            {
-                return RedirectToAction("Login", "Account"); // Redirect to login if user is not authenticated
-            }
-
-            Cart cart = await GetOrCreateCart(user);
-
-
-            // Find the specific ProductCart entry for the given product and cart
-            ProductCart? productCart = _context.ProductCart.FirstOrDefault(pc => pc.ProductId == product.Id && pc.CartId == cart.Id);
-
-            if (productCart != null)
-            {
-                // Remove the found ProductCart entry from the database
-                _context.ProductCart.Remove(productCart);
-                await _context.SaveChangesAsync();
-            }
-
-            return RedirectToAction("ViewCart");
-        }
-
-        public async Task<IActionResult> EditAmount(Product product, int amount)
-        {
-            User user = await _userManager.GetUserAsync(User);
-            if (user == null)
-            {
-                return RedirectToAction("Login", "Account"); // Redirect to login if user is not authenticated
-            }
-
-            Cart cart = await GetOrCreateCart(user);
-
-
-            // Find the specific ProductCart entry for the given product and cart
-            ProductCart? productCart = _context.ProductCart.FirstOrDefault(pc => pc.ProductId == product.Id && pc.CartId == cart.Id);
-
-            if (productCart != null)
-            {
-                // Update the quantity of the ProductCart entry
-                productCart.Quantity = amount;
-                await _context.SaveChangesAsync();
-            }
-            
-
-            return RedirectToAction("ViewCart");
-        }
-
-
-        private async Task<Cart> GetOrCreateCart(User user)
-        {
-            Cart cart = user.Cart;
             if (cart == null)
             {
-                cart = new Cart()
+                var newCart = new Cart
                 {
                     UserId = user.Id,
-                    TotalPrice = 0 // Set the initial total price
+                    TotalPrice = 0.0,
+                    Bought = false
                 };
 
-                // TODO: Save the cart to the database and associate it with the user
+                await _context.Cart.AddAsync(newCart);
+                await _context.SaveChangesAsync();
 
-                user.Cart = cart;
-                await _userManager.UpdateAsync(user);
+                var newProductCart = new ProductCart
+                {
+                    CartId = newCart.Id,
+                    Quantity = quantity,
+                    ProductId = id
+                };
+
+                await _context.ProductCart.AddAsync(newProductCart);
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                var existingProductCart = await _context.ProductCart
+                    .FirstOrDefaultAsync(pc => pc.CartId == cart.Id && pc.ProductId == id);
+
+                if (existingProductCart != null)
+                {
+                    existingProductCart.Quantity += quantity;
+                }
+                else
+                {
+                    var newProductCart = new ProductCart
+                    {
+                        CartId = cart.Id,
+                        Quantity = quantity,
+                        ProductId = id
+                    };
+
+                    await _context.ProductCart.AddAsync(newProductCart);
+                }
+
+                await _context.SaveChangesAsync();
             }
 
-            return cart;
+            return RedirectToAction("Details", "Product", new { id = id });
         }
-        */
+
+        // GET: Carts/Edit/5
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null || _context.Cart == null)
+            {
+                return NotFound();
+            }
+
+            var cart = await _context.Cart.FindAsync(id);
+            if (cart == null)
+            {
+                return NotFound();
+            }
+            ViewData["UserId"] = new SelectList(_context.Set<User>(), "Id", "Id", cart.UserId);
+            return View(cart);
+        }
+
+        // POST: Carts/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("Id,UserId,TotalPrice,Bought")] Cart cart)
+        {
+            if (id != cart.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(cart);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!CartExists(cart.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["UserId"] = new SelectList(_context.Set<User>(), "Id", "Id", cart.UserId);
+            return View(cart);
+        }
+
+        private bool CartExists(int id)
+        {
+            return (_context.Cart?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+
+
+
+        // GET: Carts/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+    {
+        if (id == null || _context.Cart == null)
+        {
+            return NotFound();
+        }
+
+        var cart = await _context.Cart
+            .Include(c => c.User)
+            .FirstOrDefaultAsync(m => m.Id == id);
+        if (cart == null)
+        {
+            return NotFound();
+        }
+
+        return View(cart);
     }
 
+    // POST: Carts/Delete/5
+    [HttpPost, ActionName("Delete")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> DeleteConfirmed(int id)
+    {
+        if (_context.Cart == null)
+        {
+            return Problem("Entity set 'ApplicationDbContext.Cart'  is null.");
+        }
+        var cart = await _context.Cart.FindAsync(id);
+        if (cart != null)
+        {
+            _context.Cart.Remove(cart);
+        }
 
+        await _context.SaveChangesAsync();
+        return RedirectToAction(nameof(Index));
+    }
 
-    //    // GET: Carts
-    //    public async Task<IActionResult> Index()
-    //    {
-    //        var applicationDbContext = _context.Cart.Include(c => c.User);
-    //        return View(await applicationDbContext.ToListAsync());
-    //    }
+        //Post: Carts/ClearCart
+        [HttpPost]
+        public async Task<IActionResult> ClearCart()
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == User.Identity.Name);
+            var cart = await _context.Cart.FirstOrDefaultAsync(c => c.UserId == user.Id && c.Bought == false);
 
-    //    // GET: Carts/Details/5
-    //    public async Task<IActionResult> Details(int? id)
-    //    {
-    //        if (id == null || _context.Cart == null)
-    //        {
-    //            return NotFound();
-    //        }
+            if (cart != null)
+            {
+                var productCartsToRemove = _context.ProductCart.Where(pc => pc.CartId == cart.Id);
 
-    //        var cart = await _context.Cart
-    //            .Include(c => c.User)
-    //            .FirstOrDefaultAsync(m => m.Id == id);
-    //        if (cart == null)
-    //        {
-    //            return NotFound();
-    //        }
+                _context.ProductCart.RemoveRange(productCartsToRemove);
+                await _context.SaveChangesAsync();
+            }
 
-    //        return View(cart);
-    //    }
+            return RedirectToAction("Index", "Carts");
+        }
 
-    //    // GET: Carts/Create
-    //    public IActionResult Create()
-    //    {
-    //        ViewData["UserId"] = new SelectList(_context.Set<User>(), "Id", "Id");
-    //        return View();
-    //    }
+        //Post: Carts/RemoveItem
+        [HttpPost]
+        public async Task<IActionResult> RemoveItem(int id)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == User.Identity.Name);
+            var cart = await _context.Cart.FirstOrDefaultAsync(c => c.UserId == user.Id && c.Bought == false);
 
-    //    // POST: Carts/Create
-    //    // To protect from overposting attacks, enable the specific properties you want to bind to.
-    //    // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-    //    [HttpPost]
-    //    [ValidateAntiForgeryToken]
-    //    public async Task<IActionResult> Create([Bind("Id,UserId,TotalPrice")] Cart cart)
-    //    {
-    //        if (ModelState.IsValid)
-    //        {
-    //            _context.Add(cart);
-    //            await _context.SaveChangesAsync();
-    //            return RedirectToAction(nameof(Index));
-    //        }
-    //        ViewData["UserId"] = new SelectList(_context.Set<User>(), "Id", "Id", cart.UserId);
-    //        return View(cart);
-    //    }
+            if (cart != null)
+            {
+                var productCarts = _context.ProductCart
+                    .Where(pc => pc.CartId == cart.Id && pc.ProductId == id)
+                    .ToList();
 
-    //    // GET: Carts/Edit/5
-    //    public async Task<IActionResult> Edit(int? id)
-    //    {
-    //        if (id == null || _context.Cart == null)
-    //        {
-    //            return NotFound();
-    //        }
+                if (productCarts.Any())
+                {
+                    _context.ProductCart.RemoveRange(productCarts);
+                    await _context.SaveChangesAsync();
+                }
+            }
 
-    //        var cart = await _context.Cart.FindAsync(id);
-    //        if (cart == null)
-    //        {
-    //            return NotFound();
-    //        }
-    //        ViewData["UserId"] = new SelectList(_context.Set<User>(), "Id", "Id", cart.UserId);
-    //        return View(cart);
-    //    }
+            return RedirectToAction("Index", "Carts");
+        }
 
-    //    // POST: Carts/Edit/5
-    //    // To protect from overposting attacks, enable the specific properties you want to bind to.
-    //    // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-    //    [HttpPost]
-    //    [ValidateAntiForgeryToken]
-    //    public async Task<IActionResult> Edit(int id, [Bind("Id,UserId,TotalPrice")] Cart cart)
-    //    {
-    //        if (id != cart.Id)
-    //        {
-    //            return NotFound();
-    //        }
-
-    //        if (ModelState.IsValid)
-    //        {
-    //            try
-    //            {
-    //                _context.Update(cart);
-    //                await _context.SaveChangesAsync();
-    //            }
-    //            catch (DbUpdateConcurrencyException)
-    //            {
-    //                if (!CartExists(cart.Id))
-    //                {
-    //                    return NotFound();
-    //                }
-    //                else
-    //                {
-    //                    throw;
-    //                }
-    //            }
-    //            return RedirectToAction(nameof(Index));
-    //        }
-    //        ViewData["UserId"] = new SelectList(_context.Set<User>(), "Id", "Id", cart.UserId);
-    //        return View(cart);
-    //    }
-
-    //    // GET: Carts/Delete/5
-    //    public async Task<IActionResult> Delete(int? id)
-    //    {
-    //        if (id == null || _context.Cart == null)
-    //        {
-    //            return NotFound();
-    //        }
-
-    //        var cart = await _context.Cart
-    //            .Include(c => c.User)
-    //            .FirstOrDefaultAsync(m => m.Id == id);
-    //        if (cart == null)
-    //        {
-    //            return NotFound();
-    //        }
-
-    //        return View(cart);
-    //    }
-
-    //    // POST: Carts/Delete/5
-    //    [HttpPost, ActionName("Delete")]
-    //    [ValidateAntiForgeryToken]
-    //    public async Task<IActionResult> DeleteConfirmed(int id)
-    //    {
-    //        if (_context.Cart == null)
-    //        {
-    //            return Problem("Entity set 'ApplicationDbContext.Cart'  is null.");
-    //        }
-    //        var cart = await _context.Cart.FindAsync(id);
-    //        if (cart != null)
-    //        {
-    //            _context.Cart.Remove(cart);
-    //        }
-
-    //        await _context.SaveChangesAsync();
-    //        return RedirectToAction(nameof(Index));
-    //    }
-
-    //    private bool CartExists(int id)
-    //    {
-    //      return (_context.Cart?.Any(e => e.Id == id)).GetValueOrDefault();
-    //    }
-    //}
+    }
 }

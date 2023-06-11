@@ -3,18 +3,18 @@ using System.ComponentModel.DataAnnotations;
 
 namespace E_Apoteka.Models
 {
-    public class MedicinePrescription
+    public class ProductPrescription
     {
         [Key]
         public int Id { get; set; }
 
         [ForeignKey("Product")]
-        public int MedicineId { get; set; }
-        public Medicine Medicine { get; set; }
+        public int ProductId { get; set; }
+        public Product Product { get; set; }
 
         [ForeignKey("Prescription")]
         public int PrescriptionId { get; set; }
         public Prescription Prescription { get; set; }
-        public MedicinePrescription() { }
+        public ProductPrescription() { }
     }
 }

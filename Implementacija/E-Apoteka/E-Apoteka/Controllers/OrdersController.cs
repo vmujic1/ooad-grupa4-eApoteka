@@ -51,6 +51,24 @@ namespace E_Apoteka.Controllers
             return View();
         }
 
+        // GET: Orders/Delivery
+        public IActionResult Delivery()
+        {
+            return View();
+        }
+
+        // GET: Orders/PaymentSelection
+        public IActionResult PaymentSelection()
+        {
+            return View();
+        }
+
+        // GET: Orders/Confirmation
+        public IActionResult Confirmation()
+        {
+            return View();
+        }
+
         // POST: Orders/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.

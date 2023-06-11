@@ -15,8 +15,8 @@ namespace E_Apoteka.Data
 		public DbSet<Category> Category { get; set; }
 		public DbSet<Comment> Comment { get; set; }
 		public DbSet<Manufacturer> Manufacturer { get; set; }
-		public DbSet<MedicineCategory> MedicineCategory { get; set; }
-		public DbSet<MedicinePrescription> MedicinePrescription { get; set; }
+		public DbSet<ProductCategory> ProductCategory { get; set; }
+		public DbSet<ProductPrescription> ProductPrescription { get; set; }
 		public DbSet<Order> Order { get; set; }
 		public DbSet<Prescription> Prescription { get; set; }
 		public DbSet<Product> Product { get; set; }
@@ -30,8 +30,8 @@ namespace E_Apoteka.Data
 			modelBuilder.Entity<Category>().ToTable("Category");
 			modelBuilder.Entity<Comment>().ToTable("Comment");
 			modelBuilder.Entity<Manufacturer>().ToTable("Manufacturer");
-			modelBuilder.Entity<MedicineCategory>().ToTable("MedicineCategory");
-			modelBuilder.Entity<MedicinePrescription>().ToTable("MedicinePrescription");
+			modelBuilder.Entity<ProductCategory>().ToTable("ProductCategory");
+			modelBuilder.Entity<ProductPrescription>().ToTable("ProductPrescription");
 			modelBuilder.Entity<Order>().ToTable("Order");
 			modelBuilder.Entity<Prescription>().ToTable("Prescription");
 			modelBuilder.Entity<Product>().ToTable("Product");

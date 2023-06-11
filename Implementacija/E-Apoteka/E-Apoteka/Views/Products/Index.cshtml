@@ -1,4 +1,4 @@
-﻿@model IEnumerable<E_Apoteka.Models.Product>
+﻿@model IEnumerable<E_Apoteka.Models.ProductCategory>
 
 @{
     ViewData["Title"] = "Index";
@@ -11,13 +11,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         .card-body {
-            height: 300px;
+            height: 250px;
         }
 
         #sidebar {
             flex: 0 0 250px;
             background-color: #f2f2f2;
             padding: 20px;
+            height: 800px;
         }
 
         .category-list {
@@ -30,9 +31,9 @@
                 margin-bottom: 10px;
             }
 
-        .category-list li {
-            margin: 20px;
-        }
+            .category-list li {
+                margin: 20px;
+            }
 
         .slider-container {
             width: 250px;
@@ -40,13 +41,6 @@
             border-radius: 3px;
             background-color: #ffffff;
         }
-
-            .slider-container h4 {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                margin-top: 0;
-            }
 
         .slider {
             width: 200px;
@@ -75,20 +69,21 @@
 <div class="container d-flex justify-content-center mt-50 mb-50">
     <div id="sidebar" style="margin-right:30px; border-color:black; ">
         <div style="background-color: #007bff; color:white; padding: 5px; margin-bottom:15px;">
-            <h4> <i class="fa fas fa-list"></i> Categories</h4>
+            <h4> <i class="fa fas fa-list"></i> Kategorije</h4>
         </div>
-        <ul class="category-list" style="height:250px; overflow:auto">
-            <li><a href="#">Category 1</a></li>
-            <li><a href="#">Category 2</a></li>
-            <li><a href="#">Category 3</a></li>
-            <li><a href="#">Category 1</a></li>
-            <li><a href="#">Category 2</a></li>
-            <li><a href="#">Category 3</a></li>
-            <li><a href="#">Category 1</a></li>
-            <li><a href="#">Category 2</a></li>
-            <li><a href="#">Category 3</a></li>
-            <!-- Add more categories as needed -->
-        </ul>
+        <div class="container">
+            <ul class="category-list" style="height: 250px; overflow: auto; list-style-type: none;">
+                @foreach (var category in ViewBag.Categories)
+                {
+                    <li>
+                        <a href="/Products/Index?category=@category" style="color: black; text-decoration: none; display: block; text-align: left;">
+                            @category
+                        </a>
+                    </li>
+                }
+            </ul>
+
+        </div>
 
         <hr />
 
@@ -105,7 +100,7 @@
             </div>
         </div>
 
-        <button id="filter-button" style=" font-family: 'Roboto'; font-weight: 500; background-color: #007bff; color:white; padding: 5px; width:200px; margin-top:20px;">Filtriraj</button>
+        <button id="filter-button" style="font-family: 'Roboto'; font-weight: 500; background-color: #007bff; color:white; padding: 5px; width:200px; margin-top:20px;">Filtriraj</button>
 
         <script>
             const minPriceElement = document.getElementById("min-price");
@@ -121,32 +116,65 @@
                     [minPrice, maxPrice] = [maxPrice, minPrice];
                 }
 
-                priceRangeElement.textContent = `$${minPrice} - $${maxPrice}`;
+                priceRangeElement.textContent = `${minPrice}KM - ${maxPrice}KM`;
             }
 
             minPriceElement.addEventListener("input", updatePriceRange);
             maxPriceElement.addEventListener("input", updatePriceRange);
 
             updatePriceRange();
+
+            const filterButton = document.getElementById("filter-button");
+
+            filterButton.addEventListener("click", function () {
+                const minPrice = document.getElementById("min-price").value;
+                const maxPrice = document.getElementById("max-price").value;
+                const category = document.getElementById("sort-select").value;
+
+                const url = new URL("/Products/Index", window.location.origin);
+                url.searchParams.append("minPrice", minPrice);
+                url.searchParams.append("maxPrice", maxPrice);
+                url.searchParams.append("sort", category);
+
+                window.location.href = url;
+            });
+
+
+            const sortSelect = document.getElementById("sort-select");
+
+            sortSelect.addEventListener("change", function () {
+                const minPrice = document.getElementById("min-price").value;
+                const maxPrice = document.getElementById("max-price").value;
+                const category = document.getElementById("category-select").value;
+                const sort = this.value;
+
+                const url = new URL("/Products/Index", window.location.origin);
+                url.searchParams.append("minPrice", minPrice);
+                url.searchParams.append("maxPrice", maxPrice);
+                url.searchParams.append("category", category);
+                url.searchParams.append("sort", sort);
+
+                window.location.href = url;
+            });
         </script>
+
+
     </div>
 
     <div id="main-content">
         <div class="search-bar" style="display: flex; justify-content: center; align-items: center; margin-bottom: 10px; border-color:blue">
             <div class="input-group" style="display: flex; align-items: center; justify-content: center;">
-                <form>
-                    <input type="search" style="width: 450px;" class="rounded" placeholder="Search...">
-                    <button type="submit" style="min-width: 100px; margin-left:7px; margin-bottom:6px; font-size:medium" class="btn btn-primary btn-sm">Search</button>
-                    <select style="margin-left:20px; width:200px;">
-                        <option value="option1">Option 1</option>
-                        <option value="option2">Option 2</option>
-                        <option value="option3">Option 3</option>
+                <form id="search-form">
+                    <input type="search" style="width: 450px;" class="rounded" placeholder="Search..." name="search">
+                    <select id="sort-select" style="margin-left: 20px; width: 200px;" name="sort">
+                        <option value="">Sortiraj</option>
+                        <option value="rating_asc">Rating: Manje-Veće</option>
+                        <option value="rating_desc">Rating: Veće-Manje</option>
+                        <option value="name_asc">Ime: A-Z</option>
+                        <option value="name_desc">Ime: Z-A</option>
                     </select>
+                    <button type="submit" style="min-width: 100px; margin-left:7px; margin-bottom:6px; font-size:medium" class="btn btn-primary btn-sm">Search</button>
                 </form>
-                <!--
-                <input type="search" style="width: 100px; padding: 10px; margin-right:50px; " class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" id="bar" />
-                <button type="button" style="min-width: 100px;" class="btn btn-outline-primary">Search</button>
-                <select>Odaberi</select>  -->
             </div>
         </div>
 
@@ -154,267 +182,42 @@
 
         <div class="row">
             <div class="row">
-                @foreach (var item in Model) {
-                <div class="col-md-4 mt-2">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="card-img-actions">
-                                <img src="@item.ImageUrl" class="card-img img-fluid" width="96" height="350" alt="">
-                            </div>
-                        </div>
-
-                        <div class="card-body bg-light text-center">
-                            <div class="mb-2">
-                                <h6 class="font-weight-semibold mb-2">
-                                        <a class="text-default mb-2" data-abc="true" asp-area="" asp-controller="Products" asp-action="Details" asp-route-id="@item.Id">@item.Name</a>
-                                </h6> 
-                                <a href="#" class="text-muted" data-abc="true">Na stanju: @item.Stock</a>
+                @foreach (var item in Model)
+                {
+                    <div class="col-md-4 mt-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-img-actions">
+                                    <img src="@item.Product.ImageUrl" class="card-img img-fluid" width="96" height="350" alt="">
+                                </div>
                             </div>
 
-                            <h3 class="mb-0 font-weight-semibold">@item.Price KM</h3>
+                            <div class="card-body bg-light text-center">
+                                <div class="mb-2">
+                                    <h6 class="font-weight-semibold mb-2">
+                                        <a class="text-default mb-2" data-abc="true" asp-area="" asp-controller="Products" asp-action="Details" asp-route-id="@item.Product.Id">@item.Product.Name</a>
+                                    </h6>
+                                    <a style="text-decoration:none;" class="text-muted" data-abc="true">
 
-           
+                                        @{
+                                            var manufacturers = ViewBag.Manufacturers as List<E_Apoteka.Models.Manufacturer>;
+                                            var manufacturer = manufacturers.FirstOrDefault(m => m.Id == item.Product.ManufacturerId);
+                                            if (manufacturer != null)
+                                            {
+                                                @manufacturer.Name
+                                            }
+                                        }
+                                    </a>
+                                </div>
 
-                            <div class="text-muted mb-3">Ocjena: @item.Rating</div>
+                                <h3 class="mb-0 font-weight-semibold">@item.Product.Price KM</h3>
 
-                         
-
-
+                                <div class="text-muted mb-3">Ocjena: @item.Product.Rating</div>
+                            </div>
                         </div>
                     </div>
-                </div>
                 }
-
-                <!--
-                <div class="col-md-4 mt-2">
-
-
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="card-img-actions">
-
-                                <img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1562074043/234.png" class="card-img img-fluid" width="96" height="350" alt="">
-
-
-                            </div>
-                        </div>
-
-                        <div class="card-body bg-light text-center">
-                            <div class="mb-2">
-                                <h6 class="font-weight-semibold mb-2">
-                                    <a href="#" class="text-default mb-2" data-abc="true">Toshiba Notebook with 500GB HDD & 8GB RAM</a>
-                                </h6>
-
-                                <a href="#" class="text-muted" data-abc="true">Laptops & Notebooks</a>
-                            </div>
-
-                            <h3 class="mb-0 font-weight-semibold">$250.99</h3>
-
-                            <div>
-                                <i class="fa fa-star star"></i>
-                                <i class="fa fa-star star"></i>
-                                <i class="fa fa-star star"></i>
-                                <i class="fa fa-star star"></i>
-                            </div>
-
-                            <div class="text-muted mb-3">34 reviews</div>
-
-                            <button type="button" class="btn bg-cart"><i class="fa fa-cart-plus mr-2"></i> Add to cart</button>
-
-
-                        </div>
-                    </div>
-
-
-
-
-                </div>
-
-                <div class="col-md-4 mt-2">
-
-
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="card-img-actions">
-
-                                <img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1562074043/234.png" class="card-img img-fluid" width="96" height="350" alt="">
-
-
-                            </div>
-                        </div>
-
-                        <div class="card-body bg-light text-center">
-                            <div class="mb-2">
-                                <h6 class="font-weight-semibold mb-2">
-                                    <a href="#" class="text-default mb-2" data-abc="true">Toshiba Notebook with 500GB HDD & 8GB RAM</a>
-                                </h6>
-
-                                <a href="#" class="text-muted" data-abc="true">Laptops & Notebooks</a>
-                            </div>
-
-                            <h3 class="mb-0 font-weight-semibold">$250.99</h3>
-
-                            <div>
-                                <i class="fa fa-star star"></i>
-                                <i class="fa fa-star star"></i>
-                                <i class="fa fa-star star"></i>
-                                <i class="fa fa-star star"></i>
-                            </div>
-
-                            <div class="text-muted mb-3">34 reviews</div>
-
-                            <button type="button" class="btn bg-cart"><i class="fa fa-cart-plus mr-2"></i> Add to cart</button>
-
-
-                        </div>
-                    </div>
-
-
-
-
-                </div>
-
-
-                <div class="col-md-4 mt-2">
-
-
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="card-img-actions">
-
-                                <img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1562074043/234.png" class="card-img img-fluid" width="96" height="350" alt="">
-
-
-                            </div>
-                        </div>
-
-                        <div class="card-body bg-light text-center">
-                            <div class="mb-2">
-                                <h6 class="font-weight-semibold mb-2">
-                                    <a href="#" class="text-default mb-2" data-abc="true">Toshiba Notebook with 500GB HDD & 8GB RAM</a>
-                                </h6>
-
-                                <a href="#" class="text-muted" data-abc="true">Laptops & Notebooks</a>
-                            </div>
-
-                            <h3 class="mb-0 font-weight-semibold">$250.99</h3>
-
-                            <div>
-                                <i class="fa fa-star star"></i>
-                                <i class="fa fa-star star"></i>
-                                <i class="fa fa-star star"></i>
-                                <i class="fa fa-star star"></i>
-                            </div>
-
-                            <div class="text-muted mb-3">34 reviews</div>
-
-                            <button type="button" class="btn bg-cart"><i class="fa fa-cart-plus mr-2"></i> Add to cart</button>
-
-
-                        </div>
-                    </div>
-
-
-
-
-                </div>
-
-
-                <div class="col-md-4 mt-2">
-
-
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="card-img-actions">
-
-                                <img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1562074043/234.png" class="card-img img-fluid" width="96" height="350" alt="">
-
-
-                            </div>
-                        </div>
-
-                        <div class="card-body bg-light text-center">
-                            <div class="mb-2">
-                                <h6 class="font-weight-semibold mb-2">
-                                    <a href="#" class="text-default mb-2" data-abc="true">Toshiba Notebook with 500GB HDD & 8GB RAM</a>
-                                </h6>
-
-                                <a href="#" class="text-muted" data-abc="true">Laptops & Notebooks</a>
-                            </div>
-
-                            <h3 class="mb-0 font-weight-semibold">$250.99</h3>
-
-                            <div>
-                                <i class="fa fa-star star"></i>
-                                <i class="fa fa-star star"></i>
-                                <i class="fa fa-star star"></i>
-                                <i class="fa fa-star star"></i>
-                            </div>
-
-                            <div class="text-muted mb-3">34 reviews</div>
-
-                            <button type="button" class="btn bg-cart"><i class="fa fa-cart-plus mr-2"></i> Add to cart</button>
-
-
-                        </div>
-                    </div>
-
-
-
-
-                </div>
-
-
-                <div class="col-md-4 mt-2">
-
-
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="card-img-actions">
-
-                                <img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1562074043/234.png" class="card-img img-fluid" width="96" height="350" alt="">
-
-
-                            </div>
-                        </div>
-
-                        <div class="card-body bg-light text-center">
-                            <div class="mb-2">
-                                <h6 class="font-weight-semibold mb-2">
-                                    <a href="#" class="text-default mb-2" data-abc="true">Toshiba Notebook with 500GB HDD & 8GB RAM</a>
-                                </h6>
-
-                                <a href="#" class="text-muted" data-abc="true">Laptops & Notebooks</a>
-                            </div>
-
-                            <h3 class="mb-0 font-weight-semibold">$250.99</h3>
-
-                            <div>
-                                <i class="fa fa-star star"></i>
-                                <i class="fa fa-star star"></i>
-                                <i class="fa fa-star star"></i>
-                                <i class="fa fa-star star"></i>
-                            </div>
-
-                            <div class="text-muted mb-3">34 reviews</div>
-
-                            <button type="button" class="btn bg-cart"><i class="fa fa-cart-plus mr-2"></i> Add to cart</button>
-
-
-                        </div>
-                    </div>
-
-
-
-
-                </div>
-
-
-
-
-
             </div>
         </div>
-        -->
     </div>
 </div>

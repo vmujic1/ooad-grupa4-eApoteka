@@ -21,6 +21,26 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\emirs\\ooad-grupa4-eApoteka\\Implementacija\\E-Apoteka\\E-Apoteka\\wwwroot\\images\\atm-card.png",
+      "PackagePath": "staticwebassets\\images\\atm-card.png"
+    },
+    {
+      "Id": "C:\\Users\\emirs\\ooad-grupa4-eApoteka\\Implementacija\\E-Apoteka\\E-Apoteka\\wwwroot\\images\\cash-on-delivery.png",
+      "PackagePath": "staticwebassets\\images\\cash-on-delivery.png"
+    },
+    {
+      "Id": "C:\\Users\\emirs\\ooad-grupa4-eApoteka\\Implementacija\\E-Apoteka\\E-Apoteka\\wwwroot\\images\\delivery-truck.png",
+      "PackagePath": "staticwebassets\\images\\delivery-truck.png"
+    },
+    {
+      "Id": "C:\\Users\\emirs\\ooad-grupa4-eApoteka\\Implementacija\\E-Apoteka\\E-Apoteka\\wwwroot\\images\\drugstore.png",
+      "PackagePath": "staticwebassets\\images\\drugstore.png"
+    },
+    {
+      "Id": "C:\\Users\\emirs\\ooad-grupa4-eApoteka\\Implementacija\\E-Apoteka\\E-Apoteka\\wwwroot\\images\\prescription.png",
+      "PackagePath": "staticwebassets\\images\\prescription.png"
+    },
+    {
       "Id": "C:\\Users\\emirs\\ooad-grupa4-eApoteka\\Implementacija\\E-Apoteka\\E-Apoteka\\wwwroot\\images\\shopping-cart.png",
       "PackagePath": "staticwebassets\\images\\shopping-cart.png"
     },

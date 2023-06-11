@@ -15,33 +15,36 @@
             </div>
             <div class="col-md-6">
                 <h2 style="font-family: 'Roboto'; font-weight: 500; color:#007bff; font-size:32px; margin-bottom:25px;">@Model.Name</h2>
+                <hr />
                 <p>
                     @Model.Description
                 </p>
 
-
+                <hr />
                 <p><strong style="font-family: 'Roboto'; font-weight: 500; color:#007bff; font-size:32px;">@Model.Price KM</strong></p>
 
 
 
-                <div class="mb-5">
-                    <div class="input-group mb-3" style="max-width: 220px;">
-                        <div class="input-group-prepend">
-                            <button class="btn btn-outline-primary js-btn-minus" type="button">&minus;</button>
-                        </div>
-                        <input type="text" class="form-control text-center" value="1" placeholder=""
-                               aria-label="Example text with button addon" aria-describedby="button-addon1">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
+             
+                <form id="addToCartForm" asp-area="" asp-controller="Carts" asp-action="AddToCart" method="post" style="display: inline-block; text-decoration: none;">
+                    <div class="mb-5">
+                        <div class="input-group mb-3" style="max-width: 220px;">
+                            <div class="input-group-prepend">
+                                <button class="btn btn-outline-primary js-btn-minus" type="button">&minus;</button>
+                            </div>
+                            <input type="text" class="form-control text-center" name="quantity" value="1" placeholder=""
+                                   aria-label="Example text with button addon" aria-describedby="button-addon1">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
+                            </div>
                         </div>
                     </div>
-
-                </div>
-                <a asp-area="" asp-controller="Carts" asp-action="Index" style="display: inline-block; text-decoration: none;">
-                    <button style="width: 200px; justify-content:center; font-family: 'Roboto'; padding: 5px; font-weight: 500; background-color: #007bff; color: white; text-decoration: none;" onmouseover="this.style.backgroundColor='#0056b3';" onmouseout="this.style.backgroundColor='#007bff';">
+                    <input type="hidden" name="id" value="@Model.Id" />
+                    <button type="submit" style="width: 200px; justify-content:center; font-family: 'Roboto'; padding: 5px; font-weight: 500; background-color: #007bff; color: white; text-decoration: none;" onmouseover="this.style.backgroundColor='#0056b3';" onmouseout="this.style.backgroundColor='#007bff';">
                         <i class="fa fas fa-shopping-cart" style="margin-right: 5px;"></i> Dodaj u korpu
                     </button>
-                </a>
+                </form>
+
 
 
                 <script>
@@ -69,6 +72,24 @@
                         if (inputElement.value <= 0) {
                             inputElement.value = 1;
                         }
+                    });
+
+                    document.getElementById("addToCartForm").addEventListener("submit", function (event) {
+                        event.preventDefault(); // Prevent the default form submission
+
+                        // Perform an AJAX request to add the product to the cart
+                        var form = event.target;
+                        var formData = new FormData(form);
+                        var xhr = new XMLHttpRequest();
+                        xhr.open(form.method, form.action, true);
+                        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                        xhr.onload = function () {
+                            // Handle the response as needed
+
+                            // Redirect to the Products/Index page
+                            window.location.href = "/Products/Index";
+                        };
+                        xhr.send(new URLSearchParams(formData).toString());
                     });
                 </script>
 

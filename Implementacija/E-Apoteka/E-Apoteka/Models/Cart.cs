@@ -14,5 +14,6 @@ public class Cart
     public string UserId { get; set; }
     public User User { get; set; }
     public double TotalPrice { get; set; }
+    public Boolean Bought { get; set; }
     public Cart() { }
 }

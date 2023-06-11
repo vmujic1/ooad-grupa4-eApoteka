@@ -5,6 +5,11 @@
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
 {
+        <li class="nav-item">
+            <a asp-area="" asp-controller="Carts" asp-action="Index">
+                <img src="/images/shopping-cart.png" style="width: 30px; height:25px; margin-top:10px; margin-left:10px;">
+            </a>
+        </li>
     <li class="nav-item">
         <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
     </li>
@@ -13,6 +18,7 @@
             <button  type="submit" class="nav-link btn btn-link text-dark">Logout</button>
         </form>
     </li>
+       
 }
 else
 {
@@ -24,3 +30,4 @@ else
     </li>
 }
 </ul>
+

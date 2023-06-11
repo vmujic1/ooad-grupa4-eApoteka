@@ -23,12 +23,79 @@ namespace E_Apoteka.Controllers
         }
 
         // GET: Products
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(double? minPrice, double? maxPrice, string category, string search, string sort)
         {
-              return _context.Product != null ? 
-                          View(await _context.Product.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Product'  is null.");
+            if (_context.Product == null)
+            {
+                return Problem("Entity set 'ApplicationDbContext.Product' is null.");
+            }
+
+            var productIds = await _context.Product.Select(p => p.Id).ToListAsync();
+
+            var categoryIds = await _context.ProductCategory
+                .Where(mc => productIds.Contains(mc.ProductId))
+                .Select(mc => mc.CategoryId)
+                .ToListAsync();
+
+            var categories = await _context.Category.Select(c => c.Name).ToListAsync();
+
+            var productCategories = await _context.ProductCategory
+                .Include(pc => pc.Product)
+                .Include(pc => pc.Category)
+                .Where(pc => productIds.Contains(pc.ProductId) && categoryIds.Contains(pc.CategoryId))
+                .ToListAsync();
+
+            ViewBag.Categories = categories;
+
+            var manufacturerIds = productCategories.Select(pc => pc.Product.ManufacturerId).Distinct().ToList();
+            var manufacturers = await _context.Manufacturer
+                .Where(m => manufacturerIds.Contains(m.Id))
+                .ToListAsync();
+
+            ViewBag.Manufacturers = manufacturers;
+
+            if (minPrice.HasValue && maxPrice.HasValue)
+            {
+                productCategories = productCategories.Where(pc => pc.Product.Price >= minPrice && pc.Product.Price <= maxPrice).ToList();
+            }
+
+            if (!string.IsNullOrEmpty(category))
+            {
+                productCategories = productCategories.Where(pc => pc.Category.Name.Equals(category, StringComparison.OrdinalIgnoreCase)).ToList();
+            }
+
+            if (!string.IsNullOrEmpty(search))
+            {
+                productCategories = productCategories.Where(pc => pc.Product.Name.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            }
+
+            if (!string.IsNullOrEmpty(sort))
+            {
+                switch (sort)
+                {
+                    case "rating_asc":
+                        productCategories = productCategories.OrderBy(pc => pc.Product.Rating).ToList();
+                        break;
+                    case "rating_desc":
+                        productCategories = productCategories.OrderByDescending(pc => pc.Product.Rating).ToList();
+                        break;
+                    case "name_asc":
+                        productCategories = productCategories.OrderBy(pc => pc.Product.Name).ToList();
+                        break;
+                    case "name_desc":
+                        productCategories = productCategories.OrderByDescending(pc => pc.Product.Name).ToList();
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            return View(productCategories);
         }
+
+
+
+
 
         // GET: Products/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -55,12 +122,6 @@ namespace E_Apoteka.Controllers
             return View();
         }
 
-        // GET: Products/Delivery
-        public IActionResult Delivery()
-        {
-            return View();
-        }
-
         // POST: Products/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -68,17 +129,29 @@ namespace E_Apoteka.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,ManufacturerId,Price,Rating,Stock,CategoryId,Description,ImageUrl")] Product product)
         {
-            product.Manufacturer = _context.Find<Manufacturer>(product.ManufacturerId);
-            product.Category = _context.Find<Category>(product.CategoryId);
-            
+            product.Manufacturer = await _context.Manufacturer.FindAsync(product.ManufacturerId);
+            product.Category = await _context.Category.FindAsync(product.CategoryId);
+
             if (ModelState.IsValid)
             {
                 _context.Add(product);
                 await _context.SaveChangesAsync();
+
+                // Create a new ProductCategory record
+                var productCategory = new ProductCategory
+                {
+                    ProductId = product.Id,
+                    CategoryId = product.CategoryId
+                };
+                _context.Add(productCategory);
+                await _context.SaveChangesAsync();
+
                 return RedirectToAction(nameof(Index));
             }
+
             return View(product);
         }
+
 
         // GET: Products/Edit/5
         [Authorize(Roles = "Administrator")]

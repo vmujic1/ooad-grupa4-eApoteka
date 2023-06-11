@@ -4,6 +4,7 @@ using E_Apoteka.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace E_Apoteka.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230611120959_NameChange")]
+    partial class NameChange
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -291,7 +293,7 @@ namespace E_Apoteka.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductCategory", (string)null);
+                    b.ToTable("MedicineCategory", (string)null);
                 });
 
             modelBuilder.Entity("E_Apoteka.Models.ProductOrder", b =>
@@ -328,16 +330,16 @@ namespace E_Apoteka.Migrations
                     b.Property<int>("PrescriptionId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ProductId")
+                    b.Property<int>("ProdutctId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("PrescriptionId");
 
-                    b.HasIndex("ProductId");
+                    b.HasIndex("ProdutctId");
 
-                    b.ToTable("ProductPrescription", (string)null);
+                    b.ToTable("MedicinePrescription", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -744,7 +746,7 @@ namespace E_Apoteka.Migrations
 
                     b.HasOne("E_Apoteka.Models.Product", "Product")
                         .WithMany()
-                        .HasForeignKey("ProductId")
+                        .HasForeignKey("ProdutctId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

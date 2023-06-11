@@ -4,6 +4,7 @@ using E_Apoteka.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace E_Apoteka.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230611102334_AddCartColumn")]
+    partial class AddCartColumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -115,6 +117,52 @@ namespace E_Apoteka.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Manufacturer", (string)null);
+                });
+
+            modelBuilder.Entity("E_Apoteka.Models.MedicineCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MedicineId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("MedicineId");
+
+                    b.ToTable("MedicineCategory", (string)null);
+                });
+
+            modelBuilder.Entity("E_Apoteka.Models.MedicinePrescription", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("MedicineId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PrescriptionId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MedicineId");
+
+                    b.HasIndex("PrescriptionId");
+
+                    b.ToTable("MedicinePrescription", (string)null);
                 });
 
             modelBuilder.Entity("E_Apoteka.Models.Order", b =>
@@ -271,29 +319,6 @@ namespace E_Apoteka.Migrations
                     b.ToTable("ProductCart", (string)null);
                 });
 
-            modelBuilder.Entity("E_Apoteka.Models.ProductCategory", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("ProductCategory", (string)null);
-                });
-
             modelBuilder.Entity("E_Apoteka.Models.ProductOrder", b =>
                 {
                     b.Property<int>("Id")
@@ -315,29 +340,6 @@ namespace E_Apoteka.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("ProductOrder", (string)null);
-                });
-
-            modelBuilder.Entity("E_Apoteka.Models.ProductPrescription", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("PrescriptionId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PrescriptionId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("ProductPrescription", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -636,6 +638,44 @@ namespace E_Apoteka.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("E_Apoteka.Models.MedicineCategory", b =>
+                {
+                    b.HasOne("E_Apoteka.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("E_Apoteka.Models.Medicine", "Medicine")
+                        .WithMany()
+                        .HasForeignKey("MedicineId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+
+                    b.Navigation("Medicine");
+                });
+
+            modelBuilder.Entity("E_Apoteka.Models.MedicinePrescription", b =>
+                {
+                    b.HasOne("E_Apoteka.Models.Medicine", "Medicine")
+                        .WithMany()
+                        .HasForeignKey("MedicineId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("E_Apoteka.Models.Prescription", "Prescription")
+                        .WithMany()
+                        .HasForeignKey("PrescriptionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Medicine");
+
+                    b.Navigation("Prescription");
+                });
+
             modelBuilder.Entity("E_Apoteka.Models.Order", b =>
                 {
                     b.HasOne("E_Apoteka.Models.User", "User")
@@ -696,25 +736,6 @@ namespace E_Apoteka.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("E_Apoteka.Models.ProductCategory", b =>
-                {
-                    b.HasOne("E_Apoteka.Models.Category", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("E_Apoteka.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Category");
-
-                    b.Navigation("Product");
-                });
-
             modelBuilder.Entity("E_Apoteka.Models.ProductOrder", b =>
                 {
                     b.HasOne("E_Apoteka.Models.Order", "Order")
@@ -730,25 +751,6 @@ namespace E_Apoteka.Migrations
                         .IsRequired();
 
                     b.Navigation("Order");
-
-                    b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("E_Apoteka.Models.ProductPrescription", b =>
-                {
-                    b.HasOne("E_Apoteka.Models.Prescription", "Prescription")
-                        .WithMany()
-                        .HasForeignKey("PrescriptionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("E_Apoteka.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Prescription");
 
                     b.Navigation("Product");
                 });

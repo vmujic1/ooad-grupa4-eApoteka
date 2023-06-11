@@ -4,68 +4,75 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.CustomerId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OrderStatus)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OrderDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OrderType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PaymentType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TotalPrice)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DeliveryAddress)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CustomerId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OrderStatus)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OrderDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OrderType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PaymentType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TotalPrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DeliveryAddress)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+        h1 {
+            margin-top: 50px;
+        }
+
+    .options {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-top: 50px;
+        justify-content:center;
+    }
+
+        .option {
+            margin: 40px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .option-image {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .option-label {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .order-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 30px;
+        }
+    </style>
+
+
+    <h1>Odaberi način preuzimanja</h1>
+
+    <div class="options">
+        <div class="option">
+        <img  src="/images/delivery-truck.png" style="height:150px;" alt="Delivery">
+        <a asp-area="" asp-controller="Orders" asp-action="Delivery">
+        <button asp-area="" asp-controller="Orders" asp-action="Delivery" class="order-button">Dostava</button>
+        </a>
+        </div>
+
+        <div class="option">
+        <img src="/images/drugstore.png" style="height:150px;" alt="Take in-store">
+        <a asp-area="" asp-controller="Orders" asp-action="Confirmation">
+        <button class="order-button">Lično preuzimanje</button>
+        </a>
+        </div>
+    </div>
+
+    <script>
+        
+    </script>
+

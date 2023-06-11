@@ -36,17 +36,14 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Index">Products</a>
+                            <form method="post" action="/Products/Index">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Index">Products</a>
+                            </form>
                         </li>
                         @if (User.Identity.IsAuthenticated)   // provjera da li je prijavljen
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Report" asp-action="Index">Report</a>
-                            </li>
-                            <li class="nav-item">
-                                <a asp-area ="" asp-controller="Carts" asp-action="Index">
-                                <img src="/images/shopping-cart.png" style="width: 30px; height:25px; margin-top:10px; margin-left:10px;">
-                            </a>
                             </li>
                         }
                     </ul>
