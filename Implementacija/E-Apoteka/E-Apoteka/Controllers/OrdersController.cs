@@ -22,9 +22,9 @@ namespace E_Apoteka.Controllers
         // GET: Orders
         public async Task<IActionResult> Index()
         {
-              return _context.Order != null ? 
-                          View(await _context.Order.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Order'  is null.");
+            return _context.Order != null ?
+                        View(await _context.Order.ToListAsync()) :
+                        Problem("Entity set 'ApplicationDbContext.Order'  is null.");
         }
 
         // GET: Orders/Details/5
@@ -180,14 +180,38 @@ namespace E_Apoteka.Controllers
             {
                 _context.Order.Remove(order);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool OrderExists(int id)
         {
-          return (_context.Order?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Order?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+
+
+        // POST: /Orders/Confirmation
+        [HttpPost, ActionName("Confirmation")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Confirmation(int id)
+        {
+            var cart = await _context.Cart.FirstOrDefaultAsync(c=>c.Id==id);
+            cart.Bought = true;
+            await _context.SaveChangesAsync();
+
+            var newCart = new Cart
+            {
+                UserId = cart.UserId,
+                TotalPrice = 0.0,
+                Bought = false
+            };
+
+            await _context.Cart.AddAsync(newCart);
+            await _context.SaveChangesAsync();
+
+
+            return RedirectToAction("Index", "Product");
         }
     }
 }

@@ -92,6 +92,45 @@
                         xhr.send(new URLSearchParams(formData).toString());
                     });
                 </script>
+                <div class="site-section">
+                    <div class="container">
+                        <h2 style="font-family: 'Roboto'; font-weight: 500; color:#007bff; font-size:32px; margin-bottom:25px;">Comments</h2>
+
+                        <!-- Display existing comments -->
+                        @if(Model.Comments != null)
+                        {
+                            foreach (var comment in Model.Comments)
+                            {
+                                <div class="comment">
+                                    <div class="comment-author">
+                                        <strong>@comment.User.UserName</strong> <span class="comment-date">@comment.CommentDate.ToString("yyyy-MM-dd")</span>
+                                    </div>
+                                    <div class="comment-content">
+                                        @comment.Text
+                                    </div>
+                                </div>
+                            }
+                        }
+                        <!-- Add your HTML code for the comment submission form here -->
+                        <!-- For example: -->
+                        <form id="addCommentForm" asp-action="AddComment" method="post">
+                            <input type="hidden" name="productId" value="@Model.Id" />
+
+                            <div class="form-group">
+                                <label for="authorName">Author Name:</label>
+                                <input type="text" class="form-control" name="authorName" required />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="content">Content:</label>
+                                <textarea class="form-control" name="content" required></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+
+                    </div>
+                </div>
 
             </div>
         </div>

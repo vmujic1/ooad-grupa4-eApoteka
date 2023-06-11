@@ -54,6 +54,13 @@ namespace E_Apoteka.Controllers
 
             ViewBag.Manufacturers = manufacturers;
 
+            var commentIds = await _context.Comment.Select(c => c.Id).Where().ToListAsync();
+            var manufacturers = await _context.Manufacturer
+                .Where(m => manufacturerIds.Contains(m.Id))
+                .ToListAsync();
+
+            ViewBag.Manufacturers = manufacturers;
+
             if (minPrice.HasValue && maxPrice.HasValue)
             {
                 productCategories = productCategories.Where(pc => pc.Product.Price >= minPrice && pc.Product.Price <= maxPrice).ToList();

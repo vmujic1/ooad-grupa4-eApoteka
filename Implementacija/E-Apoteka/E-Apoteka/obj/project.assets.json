@@ -10484,19 +10484,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\rzyen\\.nuget\\packages\\": {}
+    "C:\\Users\\Thinkpad\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\rzyen\\OneDrive\\Desktop\\OOAD\\ooad-grupa4-eApoteka\\Implementacija\\E-Apoteka\\E-Apoteka\\E-Apoteka.csproj",
+      "projectUniqueName": "C:\\Users\\Thinkpad\\source\\OOAD\\ooad-grupa4-eApoteka\\Implementacija\\E-Apoteka\\E-Apoteka\\E-Apoteka.csproj",
       "projectName": "E-Apoteka",
-      "projectPath": "C:\\Users\\rzyen\\OneDrive\\Desktop\\OOAD\\ooad-grupa4-eApoteka\\Implementacija\\E-Apoteka\\E-Apoteka\\E-Apoteka.csproj",
-      "packagesPath": "C:\\Users\\rzyen\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\rzyen\\OneDrive\\Desktop\\OOAD\\ooad-grupa4-eApoteka\\Implementacija\\E-Apoteka\\E-Apoteka\\obj\\",
+      "projectPath": "C:\\Users\\Thinkpad\\source\\OOAD\\ooad-grupa4-eApoteka\\Implementacija\\E-Apoteka\\E-Apoteka\\E-Apoteka.csproj",
+      "packagesPath": "C:\\Users\\Thinkpad\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Thinkpad\\source\\OOAD\\ooad-grupa4-eApoteka\\Implementacija\\E-Apoteka\\E-Apoteka\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\rzyen\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Thinkpad\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -10572,7 +10572,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
       }
     }
   }
