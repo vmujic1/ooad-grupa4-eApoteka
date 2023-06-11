@@ -55,25 +55,26 @@
 
 
 <h1>Odaberi način preuzimanja</h1>
+<hr/>
 
 <div class="options">
     <div class="option">
         <img src="/images/atm-card.png" style="height:150px;" alt="Delivery">
-        <a asp-area="" asp-controller="Orders" asp-action="Delivery">
-            <button asp-area="" asp-controller="Orders" asp-action="Delivery" class="order-button">Kartično plaćanje</button>
+        <a asp-area="" asp-controller="Orders" asp-action="CardPayment">
+            <button class="order-button">Kartično plaćanje</button>
         </a>
     </div>
 
     <div class="option">
         <img src="/images/cash-on-delivery.png" style="height:150px;" alt="Take in-store">
-        <a asp-area="" asp-controller="Orders" asp-action="Confirm">
+        <a asp-area="" asp-controller="Orders" asp-action="Confirmation">
             <button class="order-button">Plaćanje pouzećem</button>
         </a>
     </div>
 
     <div class="option">
         <img src="/images/prescription.png" style="height:150px;" alt="Take in-store">
-        <a asp-area="" asp-controller="Orders" asp-action="Confirm">
+        <a asp-area="" asp-controller="Orders" asp-action="PrescriptionEntry">
             <button class="order-button">Preuzimanje na recept</button>
         </a>
     </div>

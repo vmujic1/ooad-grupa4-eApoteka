@@ -1,0 +1,48 @@
+﻿<style>
+        body {
+            text-align: center;
+            padding-top: 100px;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+      
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 300px;
+            padding: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+
+    <h1>Prescription Check</h1>
+
+   
+        <label for="receiptNumber">Receipt Number:</label>
+        <input type="text" id="receiptNumber" name="receiptNumber" required>
+
+        <label for="insuranceNumber">Insurance Number:</label>
+        <input type="text" id="insuranceNumber" name="insuranceNumber" required>
+
+        <button type="submit">Submit</button>
+

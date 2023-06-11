@@ -69,6 +69,18 @@ namespace E_Apoteka.Controllers
             return View();
         }
 
+        // GET: Orders/CardPayment
+        public IActionResult CardPayment()
+        {
+            return View();
+        }
+
+        // GET: Orders/PrescriptionEntry
+        public IActionResult PrescriptionEntry()
+        {
+            return View();
+        }
+
         // POST: Orders/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
